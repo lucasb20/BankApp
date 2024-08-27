@@ -4,9 +4,8 @@ import model.Conta;
 
 public class ContaDAO extends ConexaoDB {
 
-    private static final String INSERT_CONTA_SQL = "INSERT INTO conta (nome, cpf, renda_mensal, saldo, tipo_conta_id) VALUES (?, ?, ?, ?, ?);";
-    // join para tipo_conta?
-    private static final String SELECT_CONTA_BY_ID = "SELECT id, nome, cpf, renda_mensal, saldo FROM conta WHERE id = ?;";
+    private static final String INSERT_CONTA_SQL = "INSERT INTO conta (nome, cpf, renda_mensal, saldo, tipo_conta) VALUES (?, ?, ?, ?, ?);";
+    private static final String SELECT_CONTA_BY_ID = "SELECT id, nome, cpf, renda_mensal, saldo, tipo_conta FROM conta WHERE id = ?;";
     private static final String SELECT_ALL_CONTA = "SELECT * FROM conta;";
     private static final String DELETE_CONTA_SQL = "DELETE FROM conta WHERE id = ?;";
     // alterar renda_mensal

@@ -5,18 +5,18 @@ public class Conta extends GenericModel {
     private String cpf;
     private double renda_mensal;
     private double saldo;
-    private int tipo_conta_id;
+    private String tipo_conta;
 
-    public Conta(String nome, String cpf, double renda_mensal, double saldo, int tipo_conta_id) {
+    public Conta(String nome, String cpf, double renda_mensal, double saldo, String tipo_conta) {
         this.nome = nome;
         this.cpf = cpf;
         this.renda_mensal = renda_mensal;
         this.saldo = saldo;
-        this.tipo_conta_id = tipo_conta_id;
+        this.tipo_conta = tipo_conta;
     }
 
-    public Conta(Integer id, String nome, String cpf, double renda_mensal, double saldo, int tipo_conta_id) {
-        this(String nome, String cpf, double renda_mensal, double saldo, int tipo_conta_id)
+    public Conta(Integer id, String nome, String cpf, double renda_mensal, double saldo, String tipo_conta) {
+        this(String nome, String cpf, double renda_mensal, double saldo, String tipo_conta)
         super.setId(id);
     }
 
@@ -37,7 +37,7 @@ public class Conta extends GenericModel {
                 "cpf='" + cpf + "\'" +
                 "renda_mensal='" + renda_mensal + "\'" +
                 "saldo='" + saldo + "\'" +
-                "tipo_conta='" + nome + "\'" +
+                "tipo_conta='" + tipo_conta + "\'" +
                 '}';
     }
 }

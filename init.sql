@@ -5,12 +5,7 @@ CREATE TABLE conta (
     cpf CHAR(11),
     renda_mensal DOUBLE PRECISION,
     saldo DOUBLE PRECISION,
-    tipo_conta_id INTEGER REFERENCES tipo_conta(id)
-);
-
-CREATE TABLE tipo_conta (
-    id SERIAL PRIMARY KEY,
-    descricao VARCHAR(45)
+    tipo_conta VARCHAR(45)
 );
 
 CREATE TABLE movimentacao_conta (
