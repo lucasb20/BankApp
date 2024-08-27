@@ -42,6 +42,7 @@ CREATE TABLE compra (
     id SERIAL PRIMARY KEY,
     dt_criacao Timestamp,
     valor DOUBLE PRECISION,
+    movimentacao_credito_id INTEGER REFERENCES movimentacao_credito(id)
     taxa_id INTEGER REFERENCES taxa(id)
 )
 
@@ -49,4 +50,11 @@ CREATE TABLE taxa (
     id SERIAL PRIMARY KEY,
     quantidade_de_parcela smallint,
     porcentagem smallint
+)
+
+CREATE TABLE pagamento (
+    id SERIAL PRIMARY KEY,
+    valor_total DOUBLE PRECISION,
+    dt_criacao Timestamp,
+    cartao_de_credito_id INTEGER REFERENCES cartao_de_credito(id)
 )
