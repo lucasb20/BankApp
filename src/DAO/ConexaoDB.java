@@ -1,5 +1,10 @@
 package DAO;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 public class ConexaoDB {
     private static final String dbName = "bank_db";
     private static final String dbURL = "jdbc:postgresql://localhost:5432/";
