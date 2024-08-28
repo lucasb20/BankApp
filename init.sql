@@ -2,7 +2,7 @@
 CREATE TABLE conta (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(45),
-    cpf CHAR(11),
+    cpf CHAR(11) UNIQUE,
     renda_mensal DOUBLE PRECISION,
     saldo DOUBLE PRECISION,
     divida DOUBLE PRECISION,
