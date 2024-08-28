@@ -2,23 +2,28 @@ package DAO;
 
 import model.Conta;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class ContaDAO extends ConexaoDB {
 
-    private static final String INSERT_CONTA_SQL = "INSERT INTO conta (nome, cpf, renda_mensal, saldo, tipo_conta) VALUES (?, ?, ?, ?, ?);";
-    private static final String SELECT_CONTA_BY_ID = "SELECT id, nome, cpf, renda_mensal, saldo, tipo_conta FROM conta WHERE id = ?;";
+    private static final String INSERT_CONTA_SQL = "INSERT INTO conta (nome, cpf, renda_mensal, saldo, divida, tipo_conta) VALUES (?, ?, ?, ?, ?, ?);";
+    private static final String SELECT_CONTA_BY_ID = "SELECT id, nome, cpf, renda_mensal, saldo, divida, tipo_conta FROM conta WHERE id = ?;";
     private static final String SELECT_ALL_CONTA = "SELECT * FROM conta;";
     private static final String DELETE_CONTA_SQL = "DELETE FROM conta WHERE id = ?;";
-    // alterar renda_mensal
-    private static final String UPDATE_CONTA_SQL = "UPDATE conta SET saldo = ? WHERE id = ?;";
+    private static final String UPDATE_CONTA_SQL = "UPDATE conta SET nome = ?, cpf = ?, renda_mensal = ?, saldo = ?, divida = ?, tipo_conta = ? WHERE id = ?;";
     private static final String TOTAL = "SELECT count(1) FROM conta;";
 
-    public Integer count() {
-        Integer count = 0;
+    public int count() {
+        int count = 0;
         try (PreparedStatement preparedStatement = prepararSQL(TOTAL)) {
             ResultSet rs = preparedStatement.executeQuery();
 
-            while (rs.next()) {
-                count = rs.getInt("count");
+            if (rs.next()) {
+                count = rs.getInt(1);
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -28,10 +33,15 @@ public class ContaDAO extends ConexaoDB {
         return count;
     }
 
-    // Terminar essas funções
     public void insertConta(Conta entidade) {
         try (PreparedStatement preparedStatement = prepararSQL(INSERT_CONTA_SQL)) {
-            preparedStatement.setString(1, entidade.getDescricao());
+            preparedStatement.setString(1, entidade.getNome());
+            preparedStatement.setString(2, entidade.getCpf());
+            preparedStatement.setDouble(3, entidade.getRendaMensal());
+            preparedStatement.setDouble(4, entidade.getSaldo());
+            preparedStatement.setDouble(5, entidade.getDivida());
+            preparedStatement.setString(6, entidade.getTipoConta());
+
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             printSQLException(e);
@@ -46,9 +56,15 @@ public class ContaDAO extends ConexaoDB {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
 
-            while (rs.next()) {
-                String descricao = rs.getString("descricao");
-                entidade = new Marca(id, descricao);
+            if (rs.next()) {
+                String nome = rs.getString("nome");
+                String cpf = rs.getString("cpf");
+                double rendaMensal = rs.getDouble("renda_mensal");
+                double saldo = rs.getDouble("saldo");
+                double divida = rs.getDouble("divida");
+                String tipoConta = rs.getString("tipo_conta");
+
+                entidade = new Conta(id, nome, cpf, rendaMensal, saldo, divida, tipoConta);
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -59,21 +75,28 @@ public class ContaDAO extends ConexaoDB {
     }
 
     public List<Conta> selectAllContas() {
-        List<Conta> entidades = new ArrayList<>();
+        List<Conta> contas = new ArrayList<>();
         try (PreparedStatement preparedStatement = prepararSQL(SELECT_ALL_CONTA)) {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
                 int id = rs.getInt("id");
-                String descricao = rs.getString("descricao");
-                entidades.add(new Marca(id, descricao));
+                String nome = rs.getString("nome");
+                String cpf = rs.getString("cpf");
+                double rendaMensal = rs.getDouble("renda_mensal");
+                double saldo = rs.getDouble("saldo");
+                double divida = rs.getDouble("divida");
+                String tipoConta = rs.getString("tipo_conta");
+
+                Conta conta = new Conta(id, nome, cpf, rendaMensal, saldo, divida, tipoConta);
+                contas.add(conta);
             }
         } catch (SQLException e) {
             printSQLException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        return entidades;
+        return contas;
     }
 
     public boolean deleteConta(int id) throws SQLException {
@@ -87,8 +110,13 @@ public class ContaDAO extends ConexaoDB {
 
     public boolean updateConta(Conta entidade) throws SQLException {
         try (PreparedStatement statement = prepararSQL(UPDATE_CONTA_SQL)) {
-            statement.setString(1, entidade.getDescricao());
-            statement.setInt(2, entidade.getId());
+            statement.setString(1, entidade.getNome());
+            statement.setString(2, entidade.getCpf());
+            statement.setDouble(3, entidade.getRendaMensal());
+            statement.setDouble(4, entidade.getSaldo());
+            statement.setDouble(5, entidade.getDivida());
+            statement.setString(6, entidade.getTipoConta());
+            statement.setInt(7, entidade.getId());
 
             return statement.executeUpdate() > 0;
         } catch (ClassNotFoundException e) {
