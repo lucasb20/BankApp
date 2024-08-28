@@ -5,6 +5,7 @@ CREATE TABLE conta (
     cpf CHAR(11),
     renda_mensal DOUBLE PRECISION,
     saldo DOUBLE PRECISION,
+    divida DOUBLE PRECISION,
     tipo_conta VARCHAR(45)
 );
 
