@@ -5,20 +5,16 @@ public class Conta extends GenericModel {
     private String cpf;
     private double renda_mensal;
     private double saldo;
-    private double divida;
-    private String tipo_conta;
 
-    public Conta(String nome, String cpf, double renda_mensal, double saldo, double divida, String tipo_conta) {
+    public Conta(String nome, String cpf, double renda_mensal, double saldo) {
         this.nome = nome;
         this.cpf = cpf;
         this.renda_mensal = renda_mensal;
         this.saldo = saldo;
-        this.divida = divida;
-        this.tipo_conta = tipo_conta;
     }
 
-    public Conta(Integer id, String nome, String cpf, double renda_mensal, double saldo, double divida, String tipo_conta) {
-        this(nome, cpf, renda_mensal, saldo, divida, tipo_conta);
+    public Conta(Integer id, String nome, String cpf, double renda_mensal, double saldo) {
+        this(nome, cpf, renda_mensal, saldo);
         super.setId(id);
     }
 
@@ -30,11 +26,11 @@ public class Conta extends GenericModel {
         this.cpf = cpf;
     }
 
-    public double getRenda_mensal() {
+    public double getRendaMensal() {
         return renda_mensal;
     }
 
-    public void setRenda_mensal(double renda_mensal) {
+    public void setRendaMensal(double renda_mensal) {
         this.renda_mensal = renda_mensal;
     }
 
@@ -44,22 +40,6 @@ public class Conta extends GenericModel {
 
     public void setSaldo(double saldo) {
         this.saldo = saldo;
-    }
-
-    public String getTipo_conta() {
-        return tipo_conta;
-    }
-
-    public void setTipo_conta(String tipo_conta) {
-        this.tipo_conta = tipo_conta;
-    }
-
-    public double getDivida() {
-        return divida;
-    }
-
-    public void setDivida(double divida) {
-        this.divida = divida;
     }
 
     public String getNome() {
@@ -77,8 +57,6 @@ public class Conta extends GenericModel {
                 "cpf='" + cpf + "\'" +
                 "renda_mensal='" + renda_mensal + "\'" +
                 "saldo='" + saldo + "\'" +
-                "divida='" + divida + "\'" +
-                "tipo_conta='" + tipo_conta + "\'" +
                 '}';
     }
 }
