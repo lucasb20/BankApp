@@ -1,10 +1,27 @@
+CREATE TABLE pessoa (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(45),
+    cpf CHAR(11) UNIQUE
+);
+
+CREATE TABLE client (
+    id SERIAL PRIMARY KEY,
+    fator_risco VARCHAR(45),
+    renda_mensal DOUBLE PRECISION,
+    pessoa_id INTEGER REFERENCES pessoa(id)
+);
 
 CREATE TABLE conta (
     id SERIAL PRIMARY KEY,
-    nome VARCHAR(45),
-    cpf CHAR(11) UNIQUE,
-    renda_mensal DOUBLE PRECISION,
-    saldo DOUBLE PRECISION
+    saldo DOUBLE PRECISION,
+    limite_negativo DOUBLE PRECISION,
+    client_id INTEGER REFERENCES client(id),
+    tipo_conta_id INTEGER REFERENCES tipo_conta(id)
+);
+
+CREATE TABLE tipo_conta (
+    id SERIAL PRIMARY KEY,
+    descricao VARCHAR(45)
 );
 
 CREATE TABLE movimentacao_conta (
