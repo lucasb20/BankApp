@@ -39,3 +39,23 @@ CREATE TABLE movimentacao_reserva (
     tipo_movimentacao VARCHAR(45),
     reserva_id INTEGER REFERENCES reserva(id),
 );
+
+CREATE TABLE movimentacao_conta (
+    id SERIAL PRIMARY KEY,
+    valor DOUBLE PRECISION,
+    dt_movimentacao Timestamp,
+    tipo_movimentacao VARCHAR(45),
+    conta_id INTEGER REFERENCES conta(id)
+);
+
+CREATE TABLE categoria_cartao (
+    id SERIAL PRIMARY KEY,
+    descricao VARCHAR(45)
+);
+
+CREATE TABLE cartao_credito (
+    id SERIAL PRIMARY KEY,
+    dt_fechamento Timestamp,
+    conta_id INTEGER REFERENCES conta(id),
+    categoria_cartao_id INTEGER REFERENCES categoria_cartao(id)
+);
