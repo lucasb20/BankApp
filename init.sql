@@ -59,3 +59,44 @@ CREATE TABLE cartao_credito (
     conta_id INTEGER REFERENCES conta(id),
     categoria_cartao_id INTEGER REFERENCES categoria_cartao(id)
 );
+
+CREATE TABLE bandeira_cartao (
+    id SERIAL PRIMARY KEY,
+    descricao VARCHAR(45)
+);
+
+CREATE TABLE cartao_transacao (
+    id SERIAL PRIMARY KEY,
+    numero_cartao CHAR(20),
+    cvc CHAR(3),
+    cartao_id INTEGER REFERENCES cartao_credito(id),
+    tipo_conta VARCHAR(45),
+    nome_cartao VARCHAR(255),
+    tipo_transacao VARCHAR(45),
+    is_internacional BIT,
+    bandeira_cartao_id INTEGER REFERENCES bandeira_cartao(id)
+);
+
+CREATE TABLE movimentacao_cartao (
+    id SERIAL PRIMARY KEY,
+    dt_movimentacao Timestamp,
+    valor DOUBLE PRECISION,
+    cartao_transacao_id INTEGER REFERENCES cartao_transacao(id),
+    tipo_movimentacao VARCHAR(45)
+);
+
+CREATE TABLE corretor (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(45)
+);
+
+CREATE TABLE compra (
+    id SERIAL PRIMARY KEY,
+    valor DOUBLE PRECISION,
+    quantidade_parcela INTEGER,
+    taxa_parcelamento DOUBLE PRECISION,
+    credor VARCHAR(45),
+    corretor_id INTEGER REFERENCES corretor(id),
+    cartao_transacao_id INTEGER REFERENCES cartao_transacao(id),
+    data_compra Timestamp /* Mudar isso aqui */
+);
