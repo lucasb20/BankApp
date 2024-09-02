@@ -98,5 +98,44 @@ CREATE TABLE compra (
     credor VARCHAR(45),
     corretor_id INTEGER REFERENCES corretor(id),
     cartao_transacao_id INTEGER REFERENCES cartao_transacao(id),
-    data_compra Timestamp /* Mudar isso aqui */
+    dt_compra Timestamp /* TO DO */
+);
+
+CREATE TABLE fatura_cartao (
+    id SERIAL PRIMARY KEY,
+    mes_referencia VARCHAR(45), /* TO DO */
+    ano_referencia VARCHAR(45), /* TO DO */
+    valor DOUBLE PRECISION,
+    dt_pagamento Timestamp,
+    cartao_credito_id INTEGER REFERENCES cartao_credito(id)
+);
+
+CREATE TABLE itens_fatura (
+    id SERIAL PRIMARY KEY,
+    descricao VARCHAR(45),
+    fatura_cartao_id INTEGER REFERENCES fatura_cartao(id)
+);
+
+CREATE TABLE tipo_boleto_customizado (
+    id SERIAL PRIMARY KEY,
+    descricao VARCHAR(45)
+);
+
+CREATE TABLE boleto_customizado (
+    id SERIAL PRIMARY KEY,
+    valor DOUBLE PRECISION,
+    dt_vencimento Timestamp, /* TO DO */
+    dt_geracao Timestamp, /* TO DO */
+    codigo_barras VARCHAR(45),
+    tipo_boleto_customizado_id INTEGER REFERENCES tipo_boleto_customizado(id),
+    fatura_cartao_id INTEGER REFERENCES fatura_cartao(id)
+);
+
+CREATE TABLE pagamento (
+    id SERIAL PRIMARY KEY,
+    valor_total DOUBLE PRECISION,
+    dt_pagamento Timestamp, /* TO DO */
+    fatura_cartao_id INTEGER REFERENCES fatura_cartao(id),
+    valor_parcial DOUBLE PRECISION,
+    boleto_customizado_id INTEGER REFERENCES boleto_customizado(id)
 );
