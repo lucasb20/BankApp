@@ -11,5 +11,14 @@ services:
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: bank_db
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./data:/var/lib/postgresql/data
+
+  script:
+    build: ./scripts/.
+    restart: no
+    environment:
+      USER: admin
+      PASSWORD: admin
+      DB: bank_db
+      HOST: database
+      PORT: 5432
