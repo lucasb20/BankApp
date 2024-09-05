@@ -33,6 +33,14 @@ class Conta(Base):
     pessoa_id: Mapped[int] = mapped_column(ForeignKey("pessoa.id"), nullable=False)
     tipo_conta_id: Mapped[int] = mapped_column(ForeignKey("tipo_conta.id"), nullable=False)
 
+class MovimentacaoConta(Base):
+    __tablename__ = "movimentacao_conta"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    dt_movimentacao: Mapped[datetime] = mapped_column(nullable=False)
+    valor: Mapped[float] = mapped_column(nullable=False)
+    tipo_movimentacao: Mapped[str] = mapped_column(nullable=False)
+    conta_id: Mapped[int] = mapped_column(ForeignKey("conta.id"), nullable=False)
+
 class Reserva(Base):
     __tablename__ = "reserva"
     id: Mapped[int] = mapped_column(primary_key=True)
