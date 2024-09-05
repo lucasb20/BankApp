@@ -142,10 +142,16 @@ class Pagamento:
 
 if __name__ == '__main__':
     print("sqlalchemy version:", sqlalchemy.__version__)
+
+    user = os.getenv("USER")
+    password = os.getenv("PASSWORD")
+    db = os.getenv("DB")
+    host = os.getenv("HOST")
+    port = os.getenv("PORT")
+
+    uri = f"postgresql://{user}:{password}@{host}:{port}/{db}"
+
+    engine = create_engine(uri, echo=True)
+
     print("Criação de Banco de Dados iniciada.")
-
-    DATABASE_URI = os.getenv("DATABASE_URI")
-
-    engine = create_engine(DATABASE_URI, echo=True)
-
     Base.metadata.create_all(engine)

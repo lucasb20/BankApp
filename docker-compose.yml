@@ -22,3 +22,5 @@ services:
       DB: bank_db
       HOST: database
       PORT: 5432
+    depends_on:
+      - database
