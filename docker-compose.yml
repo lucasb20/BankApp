@@ -24,3 +24,11 @@ services:
       PORT: 5432
     depends_on:
       - database
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - database
