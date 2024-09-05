@@ -70,7 +70,7 @@ class CartaoTransacao(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     numero_cartao: Mapped[str] = mapped_column(nullable=False)
     cvc: Mapped[str] = mapped_column(nullable=False)
-    cartao_id: Mapped[int] = mapped_column(ForeignKey("cartao.id"), nullable=False)
+    cartao_credito_id: Mapped[int] = mapped_column(ForeignKey("cartao_credito.id"), nullable=False)
     tipo_conta: Mapped[int] = mapped_column(ForeignKey("tipo_conta.id"), nullable=False)
     nome_cartao: Mapped[str] = mapped_column(nullable=False)
     tipo_transacao: Mapped[str] = mapped_column(nullable=False)
@@ -121,7 +121,7 @@ class TipoBoletoCustomizado(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     descricao: Mapped[str] = mapped_column(nullable=False)
 
-class BoletoCustomizado:
+class BoletoCustomizado(Base):
     __tablename__ = "boleto_customizado"
     id: Mapped[int] = mapped_column(primary_key=True)
     valor: Mapped[float] = mapped_column(nullable=False)
@@ -131,7 +131,7 @@ class BoletoCustomizado:
     tipo_boleto_customizado_id: Mapped[int] = mapped_column(ForeignKey("tipo_boleto_customizado.id"), nullable=False)
     fatura_cartao_id: Mapped[int] = mapped_column(ForeignKey("fatura_cartao.id"), nullable=False)
 
-class Pagamento:
+class Pagamento(Base):
     __tablename__ = "pagamento"
     id: Mapped[int] = mapped_column(primary_key=True)
     valor_total: Mapped[float] = mapped_column(nullable=False)
