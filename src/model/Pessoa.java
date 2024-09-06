@@ -1,15 +1,15 @@
 package model;
 
-public class Conta extends GenericModel {
+public class Pessoa extends GenericModel {
     private String nome;
     private String cpf;
 
-    public Conta(String nome, String cpf) {
+    public Pessoa(String nome, String cpf) {
         this.nome = nome;
         this.cpf = cpf;
     }
 
-    public Conta(Integer id, String nome, String cpf) {
+    public Pessoa(Integer id, String nome, String cpf) {
         this(nome, cpf);
         super.setId(id);
     }
@@ -32,8 +32,9 @@ public class Conta extends GenericModel {
 
     @Override
     public String toString() {
-        return "Conta {" +
+        return "Pessoa {" +
                 "id='" + this.getId() + "\'" +
+                "nome='" + nome + "\'" +
                 "cpf='" + cpf + "\'" +
                 '}';
     }
