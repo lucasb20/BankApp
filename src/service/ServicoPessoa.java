@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class ServicoPessoa {
 
-    private PessoaDao pessoaDao = new PessoaDao();
+    private PessoaDAO pessoaDao = new PessoaDAO();
 
     public void insertPessoa(Pessoa entidade) {
         pessoaDao.insertPessoa(entidade);
@@ -17,11 +17,23 @@ public class ServicoPessoa {
         return pessoaDao.selectPessoa(id);
     }
 
-    public Boolean updatePessoa(Pessoa entidade) throws SQLException {
-        return pessoaDao.updatePessoa(entidade);
+    public Boolean updatePessoa(Pessoa entidade) {
+        try {
+            return pessoaDao.updatePessoa(entidade);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
-    public Boolean deletePessoa(int id){
-        return pessoaDao.deletePessoa(id);
+    public Boolean deletePessoa(int id) {
+        try {
+            if (pessoaDao.deletePessoa(id)) {
+                return true;
+            } 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

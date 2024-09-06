@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class ConexaoDB {
     private static final String dbName = "bank_db";
-    private static final String dbURL = "jdbc:postgresql://localhost:5432/";
+    private static final String dbURL = "jdbc:postgresql://database:5432/";
     private static final String username = "admin";
     private static final String password = "admin";
 
