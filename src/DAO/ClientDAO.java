@@ -99,7 +99,7 @@ public class ClientDAO extends ConexaoDB {
         }
     }
 
-    public boolean updateCLIENT(Client entidade) throws SQLException {
+    public boolean updateClient(Client entidade) throws SQLException {
         try (PreparedStatement statement = prepararSQL(UPDATE_CLIENT_SQL)) {
             statement.setString(1, entidade.getFatorRisco());
             statement.setDouble(2, entidade.getRendaMensal());
