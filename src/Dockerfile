@@ -4,6 +4,6 @@ WORKDIR /app
 
 COPY . /app
 
-RUN javac Main.java
+RUN javac -cp .:./postgresql.jar Main.java
 
-CMD ["java", "Main"]
+CMD java -cp .:./postgresql.jar Main
