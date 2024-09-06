@@ -3,18 +3,14 @@ package model;
 public class Conta extends GenericModel {
     private String nome;
     private String cpf;
-    private double renda_mensal;
-    private double saldo;
 
-    public Conta(String nome, String cpf, double renda_mensal, double saldo) {
+    public Conta(String nome, String cpf) {
         this.nome = nome;
         this.cpf = cpf;
-        this.renda_mensal = renda_mensal;
-        this.saldo = saldo;
     }
 
-    public Conta(Integer id, String nome, String cpf, double renda_mensal, double saldo) {
-        this(nome, cpf, renda_mensal, saldo);
+    public Conta(Integer id, String nome, String cpf) {
+        this(nome, cpf);
         super.setId(id);
     }
 
@@ -24,22 +20,6 @@ public class Conta extends GenericModel {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
-    }
-
-    public double getRendaMensal() {
-        return renda_mensal;
-    }
-
-    public void setRendaMensal(double renda_mensal) {
-        this.renda_mensal = renda_mensal;
-    }
-
-    public double getSaldo() {
-        return saldo;
-    }
-
-    public void setSaldo(double saldo) {
-        this.saldo = saldo;
     }
 
     public String getNome() {
@@ -55,8 +35,6 @@ public class Conta extends GenericModel {
         return "Conta {" +
                 "id='" + this.getId() + "\'" +
                 "cpf='" + cpf + "\'" +
-                "renda_mensal='" + renda_mensal + "\'" +
-                "saldo='" + saldo + "\'" +
                 '}';
     }
 }
