@@ -2,7 +2,7 @@
 services:
   app:
     build: ./src/.
-    restart: no
+    restart: on-failure
     depends_on:
       - database
 
