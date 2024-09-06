@@ -57,7 +57,8 @@ CREATE TABLE cartao_credito (
     id SERIAL PRIMARY KEY,
     dt_fechamento timestamp,
     conta_id INTEGER REFERENCES conta(id),
-    categoria_cartao_id INTEGER REFERENCES categoria_cartao(id)
+    categoria_cartao_id INTEGER REFERENCES categoria_cartao(id),
+    limite_credito DOUBLE PRECISION
 );
 
 CREATE TABLE bandeira_cartao (
