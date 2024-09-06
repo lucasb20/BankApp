@@ -1,6 +1,6 @@
 package DAO;
 
-import model.Conta;
+import model.Pessoa;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,14 +8,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContaDAO extends ConexaoDB {
+public class PessoaDAO extends ConexaoDB {
 
-    private static final String INSERT_CONTA_SQL = "INSERT INTO conta (nome, cpf, renda_mensal, saldo) VALUES (?, ?, ?, ?);";
-    private static final String SELECT_CONTA_BY_ID = "SELECT id, nome, cpf, renda_mensal, saldo FROM conta WHERE id = ?;";
-    private static final String SELECT_ALL_CONTA = "SELECT * FROM conta;";
-    private static final String DELETE_CONTA_SQL = "DELETE FROM conta WHERE id = ?;";
-    private static final String UPDATE_CONTA_SQL = "UPDATE conta SET nome = ?, cpf = ?, renda_mensal = ?, saldo = ? WHERE id = ?;";
-    private static final String TOTAL = "SELECT count(1) FROM conta;";
+    private static final String INSERT_Pessoa_SQL = "INSERT INTO pessoa (nome, cpf) VALUES (?, ?);";
+    private static final String SELECT_Pessoa_BY_ID = "SELECT nome, cpf FROM Pessoa WHERE id = ?;";
+    private static final String SELECT_ALL_Pessoa = "SELECT * FROM Pessoa;";
+    private static final String DELETE_Pessoa_SQL = "DELETE FROM Pessoa WHERE id = ?;";
+    private static final String UPDATE_Pessoa_SQL = "UPDATE Pessoa SET nome = ?, cpf = ? WHERE id = ?;";
+    private static final String TOTAL = "SELECT count(1) FROM Pessoa;";
 
     public int count() {
         int count = 0;
@@ -33,12 +33,10 @@ public class ContaDAO extends ConexaoDB {
         return count;
     }
 
-    public void insertConta(Conta entidade) {
-        try (PreparedStatement preparedStatement = prepararSQL(INSERT_CONTA_SQL)) {
+    public void insertPessoa(Pessoa entidade) {
+        try (PreparedStatement preparedStatement = prepararSQL(INSERT_Pessoa_SQL)) {
             preparedStatement.setString(1, entidade.getNome());
             preparedStatement.setString(2, entidade.getCpf());
-            preparedStatement.setDouble(3, entidade.getRendaMensal());
-            preparedStatement.setDouble(4, entidade.getSaldo());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -48,19 +46,17 @@ public class ContaDAO extends ConexaoDB {
         }
     }
 
-    public Conta selectConta(int id) {
-        Conta entidade = null;
-        try (PreparedStatement preparedStatement = prepararSQL(SELECT_CONTA_BY_ID)) {
+    public Pessoa selectPessoa(int id) {
+        Pessoa entidade = null;
+        try (PreparedStatement preparedStatement = prepararSQL(SELECT_Pessoa_BY_ID)) {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
                 String nome = rs.getString("nome");
                 String cpf = rs.getString("cpf");
-                double rendaMensal = rs.getDouble("renda_mensal");
-                double saldo = rs.getDouble("saldo");
 
-                entidade = new Conta(id, nome, cpf, rendaMensal, saldo);
+                entidade = new Pessoa(id, nome, cpf);
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -70,31 +66,29 @@ public class ContaDAO extends ConexaoDB {
         return entidade;
     }
 
-    public List<Conta> selectAllContas() {
-        List<Conta> contas = new ArrayList<>();
-        try (PreparedStatement preparedStatement = prepararSQL(SELECT_ALL_CONTA)) {
+    public List<Pessoa> selectAllPessoas() {
+        List<Pessoa> pessoas = new ArrayList<>();
+        try (PreparedStatement preparedStatement = prepararSQL(SELECT_ALL_Pessoa)) {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String nome = rs.getString("nome");
                 String cpf = rs.getString("cpf");
-                double rendaMensal = rs.getDouble("renda_mensal");
-                double saldo = rs.getDouble("saldo");
 
-                Conta conta = new Conta(id, nome, cpf, rendaMensal, saldo);
-                contas.add(conta);
+                Pessoa pessoa = new Pessoa(id, nome, cpf);
+                pessoas.add(pessoa);
             }
         } catch (SQLException e) {
             printSQLException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        return contas;
+        return pessoas;
     }
 
-    public boolean deleteConta(int id) throws SQLException {
-        try (PreparedStatement statement = prepararSQL(DELETE_CONTA_SQL)) {
+    public boolean deletePessoa(int id) throws SQLException {
+        try (PreparedStatement statement = prepararSQL(DELETE_Pessoa_SQL)) {
             statement.setInt(1, id);
             return statement.executeUpdate() > 0;
         } catch (ClassNotFoundException e) {
@@ -102,13 +96,11 @@ public class ContaDAO extends ConexaoDB {
         }
     }
 
-    public boolean updateConta(Conta entidade) throws SQLException {
-        try (PreparedStatement statement = prepararSQL(UPDATE_CONTA_SQL)) {
+    public boolean updatePessoa(Pessoa entidade) throws SQLException {
+        try (PreparedStatement statement = prepararSQL(UPDATE_Pessoa_SQL)) {
             statement.setString(1, entidade.getNome());
             statement.setString(2, entidade.getCpf());
-            statement.setDouble(3, entidade.getRendaMensal());
-            statement.setDouble(4, entidade.getSaldo());
-            statement.setInt(5, entidade.getId());
+            statement.setInt(3, entidade.getId());
 
             return statement.executeUpdate() > 0;
         } catch (ClassNotFoundException e) {
