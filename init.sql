@@ -1,3 +1,5 @@
+CREATE DATABASE bank_db;
+
 CREATE TABLE pessoa (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(255),
