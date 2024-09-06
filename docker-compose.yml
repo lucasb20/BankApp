@@ -1,5 +1,11 @@
 
 services:
+  app:
+    build: ./src/.
+    restart: no
+    depends_on:
+      - database
+
   database:
     image: postgres:16-alpine
     restart: always
