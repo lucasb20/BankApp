@@ -4,6 +4,7 @@ import DAO.ClientDAO;
 import model.Client;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class ServicoClient {
 
@@ -11,6 +12,10 @@ public class ServicoClient {
 
     public void insertClient(Client entidade) {
         clientDao.insertClient(entidade);
+    }
+
+    public List<Client> selectAllClients(){
+        return clientDao.selectAllClients();
     }
 
     public Client selectClient(int id) {

@@ -4,6 +4,7 @@ import DAO.PessoaDAO;
 import model.Pessoa;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class ServicoPessoa {
 
@@ -11,6 +12,10 @@ public class ServicoPessoa {
 
     public void insertPessoa(Pessoa entidade) {
         pessoaDao.insertPessoa(entidade);
+    }
+
+    public List<Pessoa> selectAllPessoas(){
+        return pessoaDao.selectAllPessoas();
     }
 
     public Pessoa selectPessoa(int id) {
