@@ -15,4 +15,12 @@ public class TipoConta extends GenericModel {
     public String getDescricao() {
         return descricao;
     }
+
+    @Override
+    public String toString() {
+        return "TipoConta{" +
+                "id=" + super.getId() +
+                ", descricao='" + descricao + '\'' +
+                '}';
+    }
 }
