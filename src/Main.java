@@ -1,10 +1,12 @@
 
-import service.ServicoPessoa;
+import java.util.List;
+
 import model.Pessoa;
+import model.TipoConta;
 
 public class Main {
     public static void main(String[] args) {
-        ServicoPessoa servicoPessoa = new ServicoPessoa();
+        service.ServicoPessoa servicoPessoa = new service.ServicoPessoa();
         Pessoa pessoa1 = new Pessoa("Lucas Rcha", "12345678910");
         Pessoa pessoa2 = new Pessoa("Jacinto Ben", "12345678911");
 
@@ -27,5 +29,25 @@ public class Main {
         } catch (NullPointerException e) {
             System.out.println("Jacinto Ben deletado com sucesso.");
         }
+
+        service.ServicoTipoConta servicoTipoConta = new service.ServicoTipoConta();
+
+        TipoConta tipoConta1 = new TipoConta("Conta Corrente");
+        TipoConta tipoConta2 = new TipoConta("Conta Poupança");
+
+        servicoTipoConta.insertTipoConta(tipoConta1);
+        servicoTipoConta.insertTipoConta(tipoConta2);
+
+        List<TipoConta> tipoContas = servicoTipoConta.selectAllTipoContas();
+
+        for (TipoConta tipoConta : tipoContas) {
+            System.out.printf(tipoConta.toString() + '\n');
+        }
+
+        servicoTipoConta.deleteTipoConta(2);
+
+        tipoConta1 = servicoTipoConta.selectTipoConta(1);
+
+        System.out.printf(tipoConta1.toString() + '\n');
     }
 }
