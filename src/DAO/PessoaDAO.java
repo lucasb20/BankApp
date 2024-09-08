@@ -10,11 +10,11 @@ import java.util.List;
 
 public class PessoaDAO extends ConexaoDB {
 
-    private static final String INSERT_PESSOA_SQL = "INSERT INTO pessoa (nome, cpf) VALUES (?, ?);";
-    private static final String SELECT_PESSOA_BY_ID = "SELECT nome, cpf FROM Pessoa WHERE id = ?;";
-    private static final String SELECT_ALL_PESSOA = "SELECT * FROM Pessoa;";
-    private static final String DELETE_PESSOA_SQL = "DELETE FROM Pessoa WHERE id = ?;";
-    private static final String UPDATE_PESSOA_SQL = "UPDATE Pessoa SET nome = ?, cpf = ? WHERE id = ?;";
+    private static final String INSERT = "INSERT INTO pessoa (nome, cpf) VALUES (?, ?);";
+    private static final String SELECT_ID = "SELECT nome, cpf FROM Pessoa WHERE id = ?;";
+    private static final String SELECT = "SELECT * FROM Pessoa;";
+    private static final String DELETE = "DELETE FROM Pessoa WHERE id = ?;";
+    private static final String UPDATE = "UPDATE Pessoa SET nome = ?, cpf = ? WHERE id = ?;";
     private static final String TOTAL = "SELECT count(1) FROM Pessoa;";
 
     public int count() {
@@ -33,8 +33,8 @@ public class PessoaDAO extends ConexaoDB {
         return count;
     }
 
-    public void insertPessoa(Pessoa entidade) {
-        try (PreparedStatement preparedStatement = prepararSQL(INSERT_PESSOA_SQL)) {
+    public void insert(Pessoa entidade) {
+        try (PreparedStatement preparedStatement = prepararSQL(INSERT)) {
             preparedStatement.setString(1, entidade.getNome());
             preparedStatement.setString(2, entidade.getCpf());
 
@@ -46,9 +46,9 @@ public class PessoaDAO extends ConexaoDB {
         }
     }
 
-    public Pessoa selectPessoa(int id) {
+    public Pessoa select(int id) {
         Pessoa entidade = null;
-        try (PreparedStatement preparedStatement = prepararSQL(SELECT_PESSOA_BY_ID)) {
+        try (PreparedStatement preparedStatement = prepararSQL(SELECT_ID)) {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -66,9 +66,9 @@ public class PessoaDAO extends ConexaoDB {
         return entidade;
     }
 
-    public List<Pessoa> selectAllPessoas() {
+    public List<Pessoa> select() {
         List<Pessoa> pessoas = new ArrayList<>();
-        try (PreparedStatement preparedStatement = prepararSQL(SELECT_ALL_PESSOA)) {
+        try (PreparedStatement preparedStatement = prepararSQL(SELECT)) {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
@@ -87,8 +87,8 @@ public class PessoaDAO extends ConexaoDB {
         return pessoas;
     }
 
-    public boolean deletePessoa(int id) throws SQLException {
-        try (PreparedStatement statement = prepararSQL(DELETE_PESSOA_SQL)) {
+    public boolean delete(int id) throws SQLException {
+        try (PreparedStatement statement = prepararSQL(DELETE)) {
             statement.setInt(1, id);
             return statement.executeUpdate() > 0;
         } catch (ClassNotFoundException e) {
@@ -96,8 +96,8 @@ public class PessoaDAO extends ConexaoDB {
         }
     }
 
-    public boolean updatePessoa(Pessoa entidade) throws SQLException {
-        try (PreparedStatement statement = prepararSQL(UPDATE_PESSOA_SQL)) {
+    public boolean update(Pessoa entidade) throws SQLException {
+        try (PreparedStatement statement = prepararSQL(UPDATE)) {
             statement.setString(1, entidade.getNome());
             statement.setString(2, entidade.getCpf());
             statement.setInt(3, entidade.getId());

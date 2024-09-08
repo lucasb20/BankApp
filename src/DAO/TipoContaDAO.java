@@ -10,11 +10,11 @@ import java.util.List;
 
 public class TipoContaDAO extends ConexaoDB {
     
-    private static final String INSERT_TIPO_CONTA_SQL = "INSERT INTO tipo_conta (descricao) VALUES (?);";
-    private static final String SELECT_TIPO_CONTA_BY_ID = "SELECT descricao FROM tipo_conta WHERE id = ?;";
-    private static final String SELECT_ALL_TIPO_CONTA = "SELECT * FROM tipo_conta;";
-    private static final String DELETE_TIPO_CONTA_SQL = "DELETE FROM tipo_conta WHERE id = ?;";
-    private static final String UPDATE_TIPO_CONTA_SQL = "UPDATE tipo_conta SET descricao = ? WHERE id = ?;";
+    private static final String INSERT = "INSERT INTO tipo_conta (descricao) VALUES (?);";
+    private static final String SELECT_ID = "SELECT descricao FROM tipo_conta WHERE id = ?;";
+    private static final String SELECT = "SELECT * FROM tipo_conta;";
+    private static final String DELETE = "DELETE FROM tipo_conta WHERE id = ?;";
+    private static final String UPDATE = "UPDATE tipo_conta SET descricao = ? WHERE id = ?;";
     private static final String TOTAL = "SELECT count(1) FROM tipo_conta;";
 
     public int count() {
@@ -33,8 +33,8 @@ public class TipoContaDAO extends ConexaoDB {
         return count;
     }
 
-    public void insertTipoConta(TipoConta entidade) {
-        try (PreparedStatement preparedStatement = prepararSQL(INSERT_TIPO_CONTA_SQL)) {
+    public void insert(TipoConta entidade) {
+        try (PreparedStatement preparedStatement = prepararSQL(INSERT)) {
             preparedStatement.setString(1, entidade.getDescricao());
 
             preparedStatement.executeUpdate();
@@ -45,9 +45,9 @@ public class TipoContaDAO extends ConexaoDB {
         }
     }
 
-    public TipoConta selectTipoConta(int id) {
+    public TipoConta select(int id) {
         TipoConta entidade = null;
-        try (PreparedStatement preparedStatement = prepararSQL(SELECT_TIPO_CONTA_BY_ID)) {
+        try (PreparedStatement preparedStatement = prepararSQL(SELECT_ID)) {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -64,9 +64,9 @@ public class TipoContaDAO extends ConexaoDB {
         return entidade;
     }
 
-    public List<TipoConta> selectAllTipoContas() {
+    public List<TipoConta> select() {
         List<TipoConta> entidades = new ArrayList<>();
-        try (PreparedStatement preparedStatement = prepararSQL(SELECT_ALL_TIPO_CONTA)) {
+        try (PreparedStatement preparedStatement = prepararSQL(SELECT)) {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
@@ -83,8 +83,8 @@ public class TipoContaDAO extends ConexaoDB {
         return entidades;
     }
 
-    public void updateTipoConta(TipoConta entidade) {
-        try (PreparedStatement preparedStatement = prepararSQL(UPDATE_TIPO_CONTA_SQL)) {
+    public void update(TipoConta entidade) {
+        try (PreparedStatement preparedStatement = prepararSQL(UPDATE)) {
             preparedStatement.setString(1, entidade.getDescricao());
             preparedStatement.setInt(2, entidade.getId());
 
@@ -96,8 +96,8 @@ public class TipoContaDAO extends ConexaoDB {
         }
     }
 
-    public void deleteTipoConta(int id) {
-        try (PreparedStatement preparedStatement = prepararSQL(DELETE_TIPO_CONTA_SQL)) {
+    public void delete(int id) {
+        try (PreparedStatement preparedStatement = prepararSQL(DELETE)) {
             preparedStatement.setInt(1, id);
 
             preparedStatement.executeUpdate();

@@ -9,11 +9,11 @@ import java.util.List;
 import model.Reserva;
 
 public class ReservaDAO extends ConexaoDB{
-    private static final String INSERT_RESERVA_SQL = "INSERT INTO reserva (saldo, taxa, reservacol, conta_id) VALUES (?, ?, ?, ?)";
-    private static final String SELECT_RESERVA_BY_ID = "SELECT * FROM reserva WHERE id = ?";
-    private static final String SELECT_ALL_RESERVA = "SELECT * FROM reserva";
-    private static final String UPDATE_RESERVA_SQL = "UPDATE reserva SET saldo = ?, taxa = ?, reservacol = ?, conta_id = ? WHERE id = ?";
-    private static final String DELETE_RESERVA_SQL = "DELETE FROM reserva WHERE id = ?";
+    private static final String INSERT = "INSERT INTO reserva (saldo, taxa, reservacol, conta_id) VALUES (?, ?, ?, ?)";
+    private static final String SELECT_ID = "SELECT * FROM reserva WHERE id = ?";
+    private static final String SELECT = "SELECT * FROM reserva";
+    private static final String UPDATE = "UPDATE reserva SET saldo = ?, taxa = ?, reservacol = ?, conta_id = ? WHERE id = ?";
+    private static final String DELETE = "DELETE FROM reserva WHERE id = ?";
     private static final String TOTAL = "SELECT count(1) FROM reserva";
 
     public int count() {
@@ -32,8 +32,8 @@ public class ReservaDAO extends ConexaoDB{
         return count;
     }
 
-    public void insertReserva(Reserva entidade) {
-        try (PreparedStatement preparedStatement = prepararSQL(INSERT_RESERVA_SQL)) {
+    public void insert(Reserva entidade) {
+        try (PreparedStatement preparedStatement = prepararSQL(INSERT)) {
             preparedStatement.setDouble(1, entidade.getSaldo());
             preparedStatement.setDouble(2, entidade.getTaxa());
             preparedStatement.setString(3, entidade.getReservacol());
@@ -47,9 +47,9 @@ public class ReservaDAO extends ConexaoDB{
         }
     }
 
-    public Reserva selectReserva(int id) {
+    public Reserva select(int id) {
         Reserva entidade = null;
-        try (PreparedStatement preparedStatement = prepararSQL(SELECT_RESERVA_BY_ID)) {
+        try (PreparedStatement preparedStatement = prepararSQL(SELECT_ID)) {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -69,8 +69,8 @@ public class ReservaDAO extends ConexaoDB{
         return entidade;
     }
 
-    public void updateReserva(Reserva entidade) {
-        try (PreparedStatement preparedStatement = prepararSQL(UPDATE_RESERVA_SQL)) {
+    public void update(Reserva entidade) {
+        try (PreparedStatement preparedStatement = prepararSQL(UPDATE)) {
             preparedStatement.setDouble(1, entidade.getSaldo());
             preparedStatement.setDouble(2, entidade.getTaxa());
             preparedStatement.setString(3, entidade.getReservacol());
@@ -85,8 +85,8 @@ public class ReservaDAO extends ConexaoDB{
         }
     }
 
-    public void deleteReserva(int id) {
-        try (PreparedStatement preparedStatement = prepararSQL(DELETE_RESERVA_SQL)) {
+    public void delete(int id) {
+        try (PreparedStatement preparedStatement = prepararSQL(DELETE)) {
             preparedStatement.setInt(1, id);
 
             preparedStatement.executeUpdate();
@@ -97,9 +97,9 @@ public class ReservaDAO extends ConexaoDB{
         }
     }
 
-    public List<Reserva> selectAllReservas() {
+    public List<Reserva> select() {
         List<Reserva> reservas = new ArrayList<>();
-        try (PreparedStatement preparedStatement = prepararSQL(SELECT_ALL_RESERVA)) {
+        try (PreparedStatement preparedStatement = prepararSQL(SELECT)) {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
