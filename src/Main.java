@@ -49,5 +49,19 @@ public class Main {
         tipoConta1 = servicoTipoConta.selectTipoConta(1);
 
         System.out.printf(tipoConta1.toString() + '\n');
+
+        service.ServicoConta servicoConta = new service.ServicoConta();
+
+        servicoConta.inserirConta(new model.Conta("1000", "100", 1, 1));
+
+        model.Conta conta1 = servicoConta.selectConta(1);
+
+        System.out.printf(conta1.toString() + '\n');
+
+        conta1.setSaldo("2000");
+
+        servicoConta.updateConta(conta1);
+
+        System.out.printf(servicoConta.selectConta(1).toString() + '\n');
     }
 }
