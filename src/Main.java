@@ -101,5 +101,18 @@ public class Main {
         servicoReserva.updateReserva(reserva1);
 
         System.out.printf(servicoReserva.selectReserva(1).toString() + '\n');
+
+        // MovimentacaoReserva
+        service.ServicoMovimentacaoReserva servicoMovimentacaoReserva = new service.ServicoMovimentacaoReserva();
+
+        servicoMovimentacaoReserva.insertMovimentacaoReserva(1000, "Entrada", "2021-10-10", 1);
+        servicoMovimentacaoReserva.insertMovimentacaoReserva(200, "saída", "2021-10-20", 1);
+        servicoMovimentacaoReserva.insertMovimentacaoReserva(300, "entrada", "2021-10-21", 1);
+
+        List<model.MovimentacaoReserva> movimentacaoReservas = servicoMovimentacaoReserva.selectAllMovimentacaoReserva(1);
+
+        for (model.MovimentacaoReserva movimentacaoReserva : movimentacaoReservas) {
+            System.out.printf(movimentacaoReserva.toString() + '\n');
+        }
     }
 }
