@@ -2,6 +2,7 @@
 import java.util.List;
 
 import model.Pessoa;
+import model.Reserva;
 import model.TipoConta;
 import model.Client;
 import model.Conta;
@@ -85,5 +86,20 @@ public class Main {
         servicoConta.updateConta(conta1);
 
         System.out.printf(servicoConta.selectConta(1).toString() + '\n');
+
+        // Reserva
+        service.ServicoReserva servicoReserva = new service.ServicoReserva();
+
+        servicoReserva.insertReserva(new Reserva(1000, 100, "Reserva", 1));
+
+        Reserva reserva1 = servicoReserva.selectReserva(1);
+
+        System.out.printf(reserva1.toString() + '\n');
+
+        reserva1.setSaldo(1500);
+
+        servicoReserva.updateReserva(reserva1);
+
+        System.out.printf(servicoReserva.selectReserva(1).toString() + '\n');
     }
 }
