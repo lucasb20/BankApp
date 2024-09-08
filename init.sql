@@ -34,7 +34,7 @@ CREATE TABLE reserva (
 
 CREATE TABLE movimentacao_reserva (
     id SERIAL PRIMARY KEY,
-    dt_movimentacao timestamp,
+    dt_movimentacao VARCHAR(45),
     valor DOUBLE PRECISION,
     tipo_movimentacao VARCHAR(45),
     reserva_id INTEGER REFERENCES reserva(id)
@@ -43,7 +43,7 @@ CREATE TABLE movimentacao_reserva (
 CREATE TABLE movimentacao_conta (
     id SERIAL PRIMARY KEY,
     valor DOUBLE PRECISION,
-    dt_movimentacao timestamp,
+    dt_movimentacao VARCHAR(45),
     tipo_movimentacao VARCHAR(45),
     conta_id INTEGER REFERENCES conta(id)
 );
@@ -55,7 +55,7 @@ CREATE TABLE categoria_cartao (
 
 CREATE TABLE cartao_credito (
     id SERIAL PRIMARY KEY,
-    dt_fechamento timestamp,
+    dt_fechamento VARCHAR(45),
     conta_id INTEGER REFERENCES conta(id),
     categoria_cartao_id INTEGER REFERENCES categoria_cartao(id),
     limite_credito DOUBLE PRECISION
@@ -80,7 +80,7 @@ CREATE TABLE cartao_transacao (
 
 CREATE TABLE movimentacao_cartao (
     id SERIAL PRIMARY KEY,
-    dt_movimentacao timestamp,
+    dt_movimentacao VARCHAR(45),
     valor DOUBLE PRECISION,
     cartao_transacao_id INTEGER REFERENCES cartao_transacao(id),
     tipo_movimentacao VARCHAR(45)
@@ -99,7 +99,7 @@ CREATE TABLE compra (
     credor VARCHAR(45),
     corretor_id INTEGER REFERENCES corretor(id),
     cartao_transacao_id INTEGER REFERENCES cartao_transacao(id),
-    dt_compra timestamp
+    dt_compra VARCHAR(45)
 );
 
 CREATE TABLE fatura_cartao (
@@ -107,7 +107,7 @@ CREATE TABLE fatura_cartao (
     mes_referencia VARCHAR(45),
     ano_referencia VARCHAR(45),
     valor DOUBLE PRECISION,
-    dt_pagamento timestamp,
+    dt_pagamento VARCHAR(45),
     cartao_credito_id INTEGER REFERENCES cartao_credito(id)
 );
 
@@ -125,8 +125,8 @@ CREATE TABLE tipo_boleto_customizado (
 CREATE TABLE boleto_customizado (
     id SERIAL PRIMARY KEY,
     valor DOUBLE PRECISION,
-    dt_vencimento timestamp,
-    dt_geracao timestamp,
+    dt_vencimento VARCHAR(45),
+    dt_geracao VARCHAR(45),
     codigo_barras VARCHAR(45),
     tipo_boleto_customizado_id INTEGER REFERENCES tipo_boleto_customizado(id),
     fatura_cartao_id INTEGER REFERENCES fatura_cartao(id)
@@ -135,7 +135,7 @@ CREATE TABLE boleto_customizado (
 CREATE TABLE pagamento (
     id SERIAL PRIMARY KEY,
     valor_total DOUBLE PRECISION,
-    dt_pagamento timestamp,
+    dt_pagamento VARCHAR(45),
     fatura_cartao_id INTEGER REFERENCES fatura_cartao(id),
     valor_parcial DOUBLE PRECISION,
     boleto_customizado_id INTEGER REFERENCES boleto_customizado(id)
