@@ -9,11 +9,11 @@ import java.util.List;
 import model.Conta;
 
 public class ContaDAO extends ConexaoDB {
-    private static final String INSERT_CONTA_SQL = "INSERT INTO conta (saldo, limite_negativo, client_id, tipo_conta_id) VALUES (?, ?, ?, ?);";
-    private static final String SELECT_CONTA_BY_ID = "SELECT saldo, limite_negativo, client_id, tipo_conta_id FROM Conta WHERE id = ?;";
-    private static final String SELECT_ALL_CONTA = "SELECT * FROM Conta;";
-    private static final String DELETE_CONTA_SQL = "DELETE FROM Conta WHERE id = ?;";
-    private static final String UPDATE_CONTA_SQL = "UPDATE Conta SET saldo = ?, limite_negativo = ?, client_id = ?, tipo_conta_id = ? WHERE id = ?;";
+    private static final String INSERT = "INSERT INTO conta (saldo, limite_negativo, client_id, tipo_conta_id) VALUES (?, ?, ?, ?);";
+    private static final String SELECT_ID = "SELECT saldo, limite_negativo, client_id, tipo_conta_id FROM Conta WHERE id = ?;";
+    private static final String SELECT = "SELECT * FROM Conta;";
+    private static final String DELETE = "DELETE FROM Conta WHERE id = ?;";
+    private static final String UPDATE = "UPDATE Conta SET saldo = ?, limite_negativo = ?, client_id = ?, tipo_conta_id = ? WHERE id = ?;";
     private static final String TOTAL = "SELECT count(1) FROM Conta;";
     
     public int count() {
@@ -32,8 +32,8 @@ public class ContaDAO extends ConexaoDB {
         return count;
     }
 
-    public void insertConta(Conta entidade) {
-        try (PreparedStatement preparedStatement = prepararSQL(INSERT_CONTA_SQL)) {
+    public void insert(Conta entidade) {
+        try (PreparedStatement preparedStatement = prepararSQL(INSERT)) {
             preparedStatement.setDouble(1, entidade.getSaldo());
             preparedStatement.setDouble(2, entidade.getLimiteNegativo());
             preparedStatement.setInt(3, entidade.getClientId());
@@ -47,9 +47,9 @@ public class ContaDAO extends ConexaoDB {
         }
     }
 
-    public Conta selectConta(int id) {
+    public Conta selectId(int id) {
         Conta conta = null;
-        try (PreparedStatement preparedStatement = prepararSQL(SELECT_CONTA_BY_ID)) {
+        try (PreparedStatement preparedStatement = prepararSQL(SELECT_ID)) {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -69,8 +69,8 @@ public class ContaDAO extends ConexaoDB {
         return conta;
     }
 
-    public void deleteConta(int id) {
-        try (PreparedStatement preparedStatement = prepararSQL(DELETE_CONTA_SQL)) {
+    public void delete(int id) {
+        try (PreparedStatement preparedStatement = prepararSQL(DELETE)) {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -80,8 +80,8 @@ public class ContaDAO extends ConexaoDB {
         }
     }
 
-    public void updateConta(Conta entidade) {
-        try (PreparedStatement preparedStatement = prepararSQL(UPDATE_CONTA_SQL)) {
+    public void update(Conta entidade) {
+        try (PreparedStatement preparedStatement = prepararSQL(UPDATE)) {
             preparedStatement.setDouble(1, entidade.getSaldo());
             preparedStatement.setDouble(2, entidade.getLimiteNegativo());
             preparedStatement.setInt(3, entidade.getClientId());
@@ -96,9 +96,9 @@ public class ContaDAO extends ConexaoDB {
         }
     }
 
-    public List<Conta> selectAllConta() {
+    public List<Conta> select() {
         List<Conta> contas = new ArrayList<>();
-        try (PreparedStatement preparedStatement = prepararSQL(SELECT_ALL_CONTA)) {
+        try (PreparedStatement preparedStatement = prepararSQL(SELECT)) {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {

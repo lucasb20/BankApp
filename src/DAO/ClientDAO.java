@@ -10,11 +10,11 @@ import java.util.List;
 
 public class ClientDAO extends ConexaoDB {
 
-    private static final String INSERT_CLIENT_SQL = "INSERT INTO client (fator_risco, renda_mensal, pessoa_id) VALUES (?, ?, ?);";
-    private static final String SELECT_CLIENT_BY_ID = "SELECT fator_risco, renda_mensal, pessoa_id FROM client WHERE id = ?;";
-    private static final String SELECT_ALL_CLIENT = "SELECT * FROM client;";
-    private static final String DELETE_CLIENT_SQL = "DELETE FROM client WHERE id = ?;";
-    private static final String UPDATE_CLIENT_SQL = "UPDATE client SET fator_risco = ?, renda_mensal = ?, pessoa_id = ? WHERE id = ?;";
+    private static final String INSERT = "INSERT INTO client (fator_risco, renda_mensal, pessoa_id) VALUES (?, ?, ?);";
+    private static final String SELECT_ID = "SELECT fator_risco, renda_mensal, pessoa_id FROM client WHERE id = ?;";
+    private static final String SELECT = "SELECT * FROM client;";
+    private static final String DELETE = "DELETE FROM client WHERE id = ?;";
+    private static final String UPDATE = "UPDATE client SET fator_risco = ?, renda_mensal = ?, pessoa_id = ? WHERE id = ?;";
     private static final String TOTAL = "SELECT count(1) FROM client;";
 
     public int count() {
@@ -33,8 +33,8 @@ public class ClientDAO extends ConexaoDB {
         return count;
     }
 
-    public void insertClient(Client entidade) {
-        try (PreparedStatement preparedStatement = prepararSQL(INSERT_CLIENT_SQL)) {
+    public void insert(Client entidade) {
+        try (PreparedStatement preparedStatement = prepararSQL(INSERT)) {
             preparedStatement.setString(1, entidade.getFatorRisco());
             preparedStatement.setDouble(2, entidade.getRendaMensal());
             preparedStatement.setInt(3, entidade.getPessoaId());
@@ -47,9 +47,9 @@ public class ClientDAO extends ConexaoDB {
         }
     }
 
-    public Client selectClient(int id) {
+    public Client selectId(int id) {
         Client entidade = null;
-        try (PreparedStatement preparedStatement = prepararSQL(SELECT_CLIENT_BY_ID)) {
+        try (PreparedStatement preparedStatement = prepararSQL(SELECT_ID)) {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -68,9 +68,9 @@ public class ClientDAO extends ConexaoDB {
         return entidade;
     }
 
-    public List<Client> selectAllClients() {
+    public List<Client> select() {
         List<Client> clients = new ArrayList<>();
-        try (PreparedStatement preparedStatement = prepararSQL(SELECT_ALL_CLIENT)) {
+        try (PreparedStatement preparedStatement = prepararSQL(SELECT)) {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
@@ -90,8 +90,8 @@ public class ClientDAO extends ConexaoDB {
         return clients;
     }
 
-    public boolean deleteClient(int id) throws SQLException {
-        try (PreparedStatement statement = prepararSQL(DELETE_CLIENT_SQL)) {
+    public boolean delete(int id) throws SQLException {
+        try (PreparedStatement statement = prepararSQL(DELETE)) {
             statement.setInt(1, id);
             return statement.executeUpdate() > 0;
         } catch (ClassNotFoundException e) {
@@ -99,8 +99,8 @@ public class ClientDAO extends ConexaoDB {
         }
     }
 
-    public boolean updateClient(Client entidade) throws SQLException {
-        try (PreparedStatement statement = prepararSQL(UPDATE_CLIENT_SQL)) {
+    public boolean update(Client entidade) throws SQLException {
+        try (PreparedStatement statement = prepararSQL(UPDATE)) {
             statement.setString(1, entidade.getFatorRisco());
             statement.setDouble(2, entidade.getRendaMensal());
             statement.setInt(3, entidade.getPessoaId());
