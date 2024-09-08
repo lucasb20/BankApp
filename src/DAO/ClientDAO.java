@@ -58,7 +58,7 @@ public class ClientDAO extends ConexaoDB {
                 double renda_mensal = rs.getDouble("renda_mensal");
                 int pessoa_id = rs.getInt("pessoa_id");
 
-                entidade = new Client(fator_risco, renda_mensal, pessoa_id);
+                entidade = new Client(id, fator_risco, renda_mensal, pessoa_id);
             }
         } catch (SQLException e) {
             printSQLException(e);
