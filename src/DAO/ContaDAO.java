@@ -34,8 +34,8 @@ public class ContaDAO extends ConexaoDB {
 
     public void insertConta(Conta entidade) {
         try (PreparedStatement preparedStatement = prepararSQL(INSERT_CONTA_SQL)) {
-            preparedStatement.setString(1, entidade.getSaldo());
-            preparedStatement.setString(2, entidade.getLimiteNegativo());
+            preparedStatement.setDouble(1, entidade.getSaldo());
+            preparedStatement.setDouble(2, entidade.getLimiteNegativo());
             preparedStatement.setInt(3, entidade.getClientId());
             preparedStatement.setInt(4, entidade.getTipoContaId());
 
@@ -54,8 +54,8 @@ public class ContaDAO extends ConexaoDB {
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
-                String saldo = rs.getString("saldo");
-                String limiteNegativo = rs.getString("limite_negativo");
+                double saldo = rs.getDouble("saldo");
+                double limiteNegativo = rs.getDouble("limite_negativo");
                 int clientId = rs.getInt("client_id");
                 int tipoContaId = rs.getInt("tipo_conta_id");
 
@@ -82,8 +82,8 @@ public class ContaDAO extends ConexaoDB {
 
     public void updateConta(Conta entidade) {
         try (PreparedStatement preparedStatement = prepararSQL(UPDATE_CONTA_SQL)) {
-            preparedStatement.setString(1, entidade.getSaldo());
-            preparedStatement.setString(2, entidade.getLimiteNegativo());
+            preparedStatement.setDouble(1, entidade.getSaldo());
+            preparedStatement.setDouble(2, entidade.getLimiteNegativo());
             preparedStatement.setInt(3, entidade.getClientId());
             preparedStatement.setInt(4, entidade.getTipoContaId());
             preparedStatement.setInt(5, entidade.getId());
@@ -103,8 +103,8 @@ public class ContaDAO extends ConexaoDB {
 
             while (rs.next()) {
                 int id = rs.getInt("id");
-                String saldo = rs.getString("saldo");
-                String limiteNegativo = rs.getString("limite_negativo");
+                double saldo = rs.getDouble("saldo");
+                double limiteNegativo = rs.getDouble("limite_negativo");
                 int clientId = rs.getInt("client_id");
                 int tipoContaId = rs.getInt("tipo_conta_id");
 

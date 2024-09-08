@@ -10,7 +10,19 @@ public class ServicoClient {
 
     private ClientDAO clientDao = new ClientDAO();
 
+    private String calcFatorRisco (double renda_mensal){
+        if (renda_mensal < 2000){
+            Double fator_risco = renda_mensal / 2000;
+            return fator_risco.toString();
+        }
+        else{
+            return "0.0";
+        }
+    }
+
     public void insertClient(Client entidade) {
+        String fator_risco = calcFatorRisco(entidade.getRendaMensal());
+        entidade.setFatorRisco(fator_risco);
         clientDao.insertClient(entidade);
     }
 
@@ -24,6 +36,7 @@ public class ServicoClient {
 
     public Boolean updateClient(Client entidade) {
         try {
+            entidade.setFatorRisco(calcFatorRisco(entidade.getRendaMensal()));
             return clientDao.updateClient(entidade);
         } catch (SQLException e) {
             e.printStackTrace();

@@ -3,10 +3,15 @@ import java.util.List;
 
 import model.Pessoa;
 import model.TipoConta;
+import model.Client;
+import model.Conta;
 
 public class Main {
     public static void main(String[] args) {
+
+        // Pessoa
         service.ServicoPessoa servicoPessoa = new service.ServicoPessoa();
+
         Pessoa pessoa1 = new Pessoa("Lucas Rcha", "12345678910");
         Pessoa pessoa2 = new Pessoa("Jacinto Ben", "12345678911");
 
@@ -30,6 +35,7 @@ public class Main {
             System.out.println("Jacinto Ben deletado com sucesso.");
         }
 
+        // TipoConta
         service.ServicoTipoConta servicoTipoConta = new service.ServicoTipoConta();
 
         TipoConta tipoConta1 = new TipoConta("Conta Corrente");
@@ -50,15 +56,31 @@ public class Main {
 
         System.out.printf(tipoConta1.toString() + '\n');
 
+        // Client
+        service.ServicoClient servicoClient = new service.ServicoClient();
+
+        servicoClient.insertClient(new Client("0", 1500, 1));
+
+        Client client1 = servicoClient.selectClient(1);
+
+        System.out.printf(client1.toString() + '\n');
+
+        client1.setRendaMensal(1900);
+
+        servicoClient.updateClient(client1);
+
+        System.out.printf(servicoClient.selectClient(1).toString() + '\n');
+
+        // Conta
         service.ServicoConta servicoConta = new service.ServicoConta();
 
-        servicoConta.inserirConta(new model.Conta("1000", "100", 1, 1));
+        servicoConta.inserirConta(new Conta(1000, 100, 1, 1));
 
         model.Conta conta1 = servicoConta.selectConta(1);
 
         System.out.printf(conta1.toString() + '\n');
 
-        conta1.setSaldo("2000");
+        conta1.setSaldo(1500);
 
         servicoConta.updateConta(conta1);
 
