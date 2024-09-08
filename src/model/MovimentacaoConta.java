@@ -49,4 +49,15 @@ class MovimentacaoConta extends GenericModel {
     public void setContaId(int conta_id) {
         this.conta_id = conta_id;
     }
+
+    @Override
+    public String toString() {
+        return "MovimentacaoConta{" +
+                "id=" + super.getId() +
+                ", valor=" + valor +
+                ", dt_movimentacao='" + dt_movimentacao + '\'' +
+                ", tipoMovimentacao='" + tipoMovimentacao + '\'' +
+                ", conta_id=" + conta_id +
+                '}';
+    }
 }
