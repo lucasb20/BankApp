@@ -47,7 +47,7 @@ public class ContaDAO extends ConexaoDB {
         }
     }
 
-    public Conta selectId(int id) {
+    public Conta select(int id) {
         Conta conta = null;
         try (PreparedStatement preparedStatement = prepararSQL(SELECT_ID)) {
             preparedStatement.setInt(1, id);

@@ -47,7 +47,7 @@ public class ClientDAO extends ConexaoDB {
         }
     }
 
-    public Client selectId(int id) {
+    public Client select(int id) {
         Client entidade = null;
         try (PreparedStatement preparedStatement = prepararSQL(SELECT_ID)) {
             preparedStatement.setInt(1, id);

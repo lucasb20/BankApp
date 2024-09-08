@@ -1,7 +1,7 @@
 package model;
 
 public class Compra extends GenericModel {
-    private int quantidade_de_parcela;
+    private int quantidade_parcela;
     private double valor;
     private int cartao_transacao_id;
     private int corretor_id;
@@ -9,8 +9,8 @@ public class Compra extends GenericModel {
     private String credor;
     private String dt_compra;
 
-    public Compra(int quantidade_de_parcela, double valor, int cartao_transacao_id, int corretor_id, double taxa_parcelamento, String credor, String dt_compra) {
-        this.quantidade_de_parcela = quantidade_de_parcela;
+    public Compra(int quantidade_parcela, double valor, int cartao_transacao_id, int corretor_id, double taxa_parcelamento, String credor, String dt_compra) {
+        this.quantidade_parcela = quantidade_parcela;
         this.valor = valor;
         this.cartao_transacao_id = cartao_transacao_id;
         this.corretor_id = corretor_id;
@@ -19,13 +19,13 @@ public class Compra extends GenericModel {
         this.dt_compra = dt_compra;
     }
 
-    public Compra(int id, int quantidade_de_parcela, double valor, int cartao_transacao_id, int corretor_id, double taxa_parcelamento, String credor, String dt_compra) {
-        this(quantidade_de_parcela, valor, cartao_transacao_id, corretor_id, taxa_parcelamento, credor, dt_compra);
+    public Compra(int id, int quantidade_parcela, double valor, int cartao_transacao_id, int corretor_id, double taxa_parcelamento, String credor, String dt_compra) {
+        this(quantidade_parcela, valor, cartao_transacao_id, corretor_id, taxa_parcelamento, credor, dt_compra);
         super.setId(id);
     }
 
-    public int getQuantidadeDeParcela() {
-        return quantidade_de_parcela;
+    public int getQuantidadeParcela() {
+        return quantidade_parcela;
     }
 
     public double getValor() {
@@ -52,8 +52,8 @@ public class Compra extends GenericModel {
         return dt_compra;
     }
 
-    public void setQuantidadeDeParcela(int quantidade_de_parcela) {
-        this.quantidade_de_parcela = quantidade_de_parcela;
+    public void setQuantidadeParcela(int quantidade_parcela) {
+        this.quantidade_parcela = quantidade_parcela;
     }
 
     public void setValor(double valor) {
@@ -84,7 +84,7 @@ public class Compra extends GenericModel {
     public String toString() {
         return "Compra{" +
                 "id=" + super.getId() +
-                ", quantidade_de_parcela=" + quantidade_de_parcela +
+                ", quantidade_parcela=" + quantidade_parcela +
                 ", valor=" + valor +
                 ", cartao_transacao + " + cartao_transacao_id +
                 ", corretor_id=" + corretor_id +

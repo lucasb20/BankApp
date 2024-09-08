@@ -75,7 +75,7 @@ public class CompraDAO extends ConexaoDB {
         return compras;
     }
 
-    public Compra selectId(int id) {
+    public Compra select(int id) {
         Compra compra = null;
         try (PreparedStatement preparedStatement = prepararSQL(SELECT_ID)) {
             preparedStatement.setInt(1, id);

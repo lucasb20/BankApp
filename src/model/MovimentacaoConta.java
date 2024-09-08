@@ -1,6 +1,6 @@
 package model;
 
-class MovimentacaoConta extends GenericModel {
+public class MovimentacaoConta extends GenericModel {
     private double valor;
     private String dt_movimentacao;
     private String tipoMovimentacao;

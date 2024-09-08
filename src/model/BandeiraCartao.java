@@ -12,11 +12,11 @@ public class BandeiraCartao extends GenericModel {
         super.setId(id);
     }
 
-    public String getdescricao() {
+    public String getDescricao() {
         return descricao;
     }
 
-    public void setdescricao(String descricao) {
+    public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 

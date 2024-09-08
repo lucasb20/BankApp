@@ -11,11 +11,11 @@ import model.MovimentacaoReserva;
 import java.util.ArrayList;
 
 public class MovimentacaoReservaDAO extends ConexaoDB {
-    private static final String INSERT_MOVIMENTACAO_RESERVA = "INSERT INTO movimentacao_reserva (valor, tipo_movimentacao, dt_movimentacao, reserva_id) VALUES (?, ?, ?, ?)";
-    private static final String SELECT_MOVIMENTACAO_RESERVA = "SELECT * FROM movimentacao_reserva WHERE reserva_id = ?";
-    private static final String UPDATE_MOVIMENTACAO_RESERVA = "UPDATE movimentacao_reserva SET valor = ?, tipo_movimentacao = ?, dt_movimentacao = ? WHERE reserva_id = ?";
-    private static final String SELECT_MOVIMENTACAO_RESERVA_BY_ID = "SELECT * FROM movimentacao_reserva WHERE id = ?";
-    private static final String DELETE_MOVIMENTACAO_RESERVA = "DELETE FROM movimentacao_reserva WHERE id = ?";
+    private static final String INSERT = "INSERT INTO movimentacao_reserva (valor, tipo_movimentacao, dt_movimentacao, reserva_id) VALUES (?, ?, ?, ?)";
+    private static final String SELECT = "SELECT * FROM movimentacao_reserva WHERE reserva_id = ?";
+    private static final String UPDATE = "UPDATE movimentacao_reserva SET valor = ?, tipo_movimentacao = ?, dt_movimentacao = ? WHERE reserva_id = ?";
+    private static final String SELECT_ID = "SELECT * FROM movimentacao_reserva WHERE id = ?";
+    private static final String DELETE = "DELETE FROM movimentacao_reserva WHERE id = ?";
     private static final String TOTAL = "SELECT count(1) FROM movimentacao_reserva";
 
     public int count() {
@@ -34,8 +34,8 @@ public class MovimentacaoReservaDAO extends ConexaoDB {
         return count;
     }
 
-    public void insertMovimentacaoReserva(double valor, String tipo_movimentacao, String dt_movimentacao, int reserva_id) {
-        try (PreparedStatement preparedStatement = prepararSQL(INSERT_MOVIMENTACAO_RESERVA)) {
+    public void insert(double valor, String tipo_movimentacao, String dt_movimentacao, int reserva_id) {
+        try (PreparedStatement preparedStatement = prepararSQL(INSERT)) {
             preparedStatement.setDouble(1, valor);
             preparedStatement.setString(2, tipo_movimentacao);
             preparedStatement.setString(3, dt_movimentacao);
@@ -49,8 +49,8 @@ public class MovimentacaoReservaDAO extends ConexaoDB {
         }
     }
 
-    public void updateMovimentacaoReserva(double valor, String tipo_movimentacao, String dt_movimentacao, int reserva_id) {
-        try (PreparedStatement preparedStatement = prepararSQL(UPDATE_MOVIMENTACAO_RESERVA)) {
+    public void update(double valor, String tipo_movimentacao, String dt_movimentacao, int reserva_id) {
+        try (PreparedStatement preparedStatement = prepararSQL(UPDATE)) {
             preparedStatement.setDouble(1, valor);
             preparedStatement.setString(2, tipo_movimentacao);
             preparedStatement.setString(3, dt_movimentacao);
@@ -64,8 +64,8 @@ public class MovimentacaoReservaDAO extends ConexaoDB {
         }
     }
 
-    public void deleteMovimentacaoReserva(int id) {
-        try (PreparedStatement preparedStatement = prepararSQL(DELETE_MOVIMENTACAO_RESERVA)) {
+    public void delete(int id) {
+        try (PreparedStatement preparedStatement = prepararSQL(DELETE)) {
             preparedStatement.setInt(1, id);
 
             preparedStatement.executeUpdate();
@@ -76,10 +76,9 @@ public class MovimentacaoReservaDAO extends ConexaoDB {
         }
     }
 
-    public List<MovimentacaoReserva> selectAllMovimentacaoReserva(int reserva_id) {
-        List<MovimentacaoReserva> movimentacoes = new ArrayList<MovimentacaoReserva>();
-        try (PreparedStatement preparedStatement = prepararSQL(SELECT_MOVIMENTACAO_RESERVA)) {
-            preparedStatement.setInt(1, reserva_id);
+    public List<MovimentacaoReserva> select() {
+        List<MovimentacaoReserva> movimentacoes = new ArrayList<>();
+        try (PreparedStatement preparedStatement = prepararSQL(SELECT)) {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
@@ -87,6 +86,7 @@ public class MovimentacaoReservaDAO extends ConexaoDB {
                 double valor = rs.getDouble("valor");
                 String tipo_movimentacao = rs.getString("tipo_movimentacao");
                 String dt_movimentacao = rs.getString("dt_movimentacao");
+                int reserva_id = rs.getInt("reserva_id");
 
                 movimentacoes.add(new MovimentacaoReserva(id, valor, tipo_movimentacao, dt_movimentacao, reserva_id));
             }
@@ -98,9 +98,9 @@ public class MovimentacaoReservaDAO extends ConexaoDB {
         return movimentacoes;
     }
 
-    public MovimentacaoReserva selectMovimentacaoReserva(int id) {
+    public MovimentacaoReserva select(int id) {
         MovimentacaoReserva movimentacao = null;
-        try (PreparedStatement preparedStatement = prepararSQL(SELECT_MOVIMENTACAO_RESERVA_BY_ID)) {
+        try (PreparedStatement preparedStatement = prepararSQL(SELECT_ID)) {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
 
