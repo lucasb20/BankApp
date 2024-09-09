@@ -4,6 +4,7 @@ import java.util.List;
 import model.Pessoa;
 import model.Reserva;
 import model.TipoConta;
+import model.CartaoCredito;
 import model.CategoriaCartao;
 import model.Client;
 import model.Conta;
@@ -143,5 +144,14 @@ public class Main {
         for (CategoriaCartao categoriaCartao : categoriaCartaos) {
             System.out.printf(categoriaCartao.toString() + '\n');
         }
+        
+        // Cartão Crédito
+        service.ServicoCartaoCredito servicoCartaoCredito = new service.ServicoCartaoCredito();
+
+        servicoCartaoCredito.insertCartaoCredito(new CartaoCredito("2026-02-01 00:00:00", 3000, 1, 1));
+
+        CartaoCredito cartaoCredito1 = servicoCartaoCredito.selectCartaoCredito(1);
+
+        System.out.printf(cartaoCredito1.toString() + '\n');
     }
 }
