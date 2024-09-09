@@ -3,6 +3,7 @@ import java.util.List;
 
 import model.Pessoa;
 import model.Reserva;
+import model.TipoBoletoCustomizado;
 import model.TipoConta;
 import model.BandeiraCartao;
 import model.CartaoCredito;
@@ -234,6 +235,19 @@ public class Main {
 
         for (ItensFatura itensFatura : itensFaturas) {
             System.out.printf(itensFatura.toString() + '\n');
+        }
+
+        // Tipo Boleto Customizado
+
+        service.ServicoTipoBoletoCustomizado servicoTipoBoletoCustomizado = new service.ServicoTipoBoletoCustomizado();
+
+        servicoTipoBoletoCustomizado.insertTipoBoletoCustomizado(new TipoBoletoCustomizado("Boleto1"));
+        servicoTipoBoletoCustomizado.insertTipoBoletoCustomizado(new TipoBoletoCustomizado("Boleto2"));
+
+        List<TipoBoletoCustomizado> tipoBoletoCustomizados = servicoTipoBoletoCustomizado.selectAllTipoBoletoCustomizado();
+
+        for (TipoBoletoCustomizado tipoBoletoCustomizado : tipoBoletoCustomizados) {
+            System.out.printf(tipoBoletoCustomizado.toString() + '\n');
         }
     }
 }
