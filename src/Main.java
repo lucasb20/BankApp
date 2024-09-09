@@ -158,7 +158,8 @@ public class Main {
         // Cartão Transação
         service.ServicoCartaoTransacao servicoCartaoTransacao = new service.ServicoCartaoTransacao();
 
-        servicoCartaoTransacao.insertCartaoTransacao(new CartaoTransacao("1234567891011121", "123", 1, "Crédito", "Lucas Rocha", "Compra", false, 1));
+        servicoCartaoTransacao.insertCartaoTransacao(new CartaoTransacao("1234567891011121", "123", 1, "Físico", "Lucas Rocha", "Compra", 0, 1));
+        servicoCartaoTransacao.insertCartaoTransacao(new CartaoTransacao("1234567891011122", "123", 1, "Virtual", "Lucas Rocha", "Alimentação", 1, 1));
 
         CartaoTransacao cartaoTransacao1 = servicoCartaoTransacao.selectCartaoTransacao(1);
 

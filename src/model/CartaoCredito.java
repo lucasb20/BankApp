@@ -49,4 +49,15 @@ public class CartaoCredito extends GenericModel {
     public void setContaId(int conta_id) {
         this.conta_id = conta_id;
     }
+
+    @Override
+    public String toString() {
+        return "CartaoCredito{" +
+                "id=" + super.getId() +
+                ", dt_fechamento='" + dt_fechamento + '\'' +
+                ", limite_credito=" + limite_credito +
+                ", categoria_cartao_id=" + categoria_cartao_id +
+                ", conta_id=" + conta_id +
+                '}';
+    }
 }

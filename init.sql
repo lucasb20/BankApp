@@ -71,7 +71,7 @@ CREATE TABLE cartao_transacao (
     numero_cartao CHAR(20),
     cvc CHAR(3),
     cartao_credito_id INTEGER REFERENCES cartao_credito(id),
-    tipo_conta VARCHAR(45),
+    tipo_cartao VARCHAR(45),
     nome_cartao VARCHAR(255),
     tipo_transacao VARCHAR(45),
     is_internacional BIT,
