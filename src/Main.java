@@ -19,6 +19,7 @@ import model.ItensFatura;
 import model.MovimentacaoReserva;
 import model.Pagamento;
 import model.MovimentacaoConta;
+import model.MovimentacaoCartao;
 
 public class Main {
     public static void main(String[] args) {
@@ -185,6 +186,19 @@ public class Main {
 
         for (CartaoTransacao cartaoTransacao : cartaoTransacaos) {
             System.out.printf(cartaoTransacao.toString() + '\n');
+        }
+
+        // Movimentação Cartão
+        service.ServicoMovimentacaoCartao servicoMovimentacaoCartao = new service.ServicoMovimentacaoCartao();
+
+        servicoMovimentacaoCartao.insertMovimentacaoCartao(new MovimentacaoCartao(1, "Saída", 100, ""));
+        servicoMovimentacaoCartao.insertMovimentacaoCartao(new MovimentacaoCartao(1, "Saída", 200, ""));
+        servicoMovimentacaoCartao.insertMovimentacaoCartao(new MovimentacaoCartao(2, "Saída", 300, ""));
+
+        List<model.MovimentacaoCartao> movimentacaoCartaos = servicoMovimentacaoCartao.selectAllMovimentacaoCartao();
+
+        for (model.MovimentacaoCartao movimentacaoCartao : movimentacaoCartaos) {
+            System.out.printf(movimentacaoCartao.toString() + '\n');
         }
 
         // Corretor
