@@ -74,7 +74,7 @@ CREATE TABLE cartao_transacao (
     tipo_cartao VARCHAR(45),
     nome_cartao VARCHAR(255),
     tipo_transacao VARCHAR(45),
-    is_internacional BIT,
+    is_internacional INTEGER,
     bandeira_cartao_id INTEGER REFERENCES bandeira_cartao(id)
 );
 

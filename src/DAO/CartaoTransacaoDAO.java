@@ -60,14 +60,14 @@ public class CartaoTransacaoDAO extends ConexaoDB {
                 int id = rs.getInt("id");
                 String numero_cartao = rs.getString("numero_cartao");
                 String cvc = rs.getString("cvc");
-                int cartao_id = rs.getInt("cartao_id");
+                int cartao_credito_id = rs.getInt("cartao_credito_id");
                 String tipo_cartao = rs.getString("tipo_cartao");
                 String nome_cartao = rs.getString("nome_cartao");
                 String tipo_transacao = rs.getString("tipo_transacao");
                 int is_internacional = rs.getInt("is_internacional");
                 int bandeira_cartao_id = rs.getInt("bandeira_cartao_id");
 
-                cartaoTransacaos.add(new CartaoTransacao(id, numero_cartao, cvc, cartao_id, tipo_cartao, nome_cartao, tipo_transacao, is_internacional, bandeira_cartao_id));
+                cartaoTransacaos.add(new CartaoTransacao(id, numero_cartao, cvc, cartao_credito_id, tipo_cartao, nome_cartao, tipo_transacao, is_internacional, bandeira_cartao_id));
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -87,14 +87,14 @@ public class CartaoTransacaoDAO extends ConexaoDB {
             if (rs.next()) {
                 String numero_cartao = rs.getString("numero_cartao");
                 String cvc = rs.getString("cvc");
-                int cartao_id = rs.getInt("cartao_id");
+                int cartao_credito_id = rs.getInt("cartao_credito_id");
                 String tipo_cartao = rs.getString("tipo_cartao");
                 String nome_cartao = rs.getString("nome_cartao");
                 String tipo_transacao = rs.getString("tipo_transacao");
                 int is_internacional = rs.getInt("is_internacional");
                 int bandeira_cartao_id = rs.getInt("bandeira_cartao_id");
 
-                cartaoTransacao = new CartaoTransacao(id, numero_cartao, cvc, cartao_id, tipo_cartao, nome_cartao, tipo_transacao, is_internacional, bandeira_cartao_id);
+                cartaoTransacao = new CartaoTransacao(id, numero_cartao, cvc, cartao_credito_id, tipo_cartao, nome_cartao, tipo_transacao, is_internacional, bandeira_cartao_id);
             }
         } catch (SQLException e) {
             printSQLException(e);
