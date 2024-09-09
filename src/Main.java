@@ -11,6 +11,7 @@ import model.CategoriaCartao;
 import model.Client;
 import model.Compra;
 import model.Conta;
+import model.Corretor;
 import model.MovimentacaoReserva;
 import model.MovimentacaoConta;
 
@@ -179,6 +180,18 @@ public class Main {
 
         for (CartaoTransacao cartaoTransacao : cartaoTransacaos) {
             System.out.printf(cartaoTransacao.toString() + '\n');
+        }
+
+        // Corretor
+        service.ServicoCorretor servicoCorretor = new service.ServicoCorretor();
+
+        servicoCorretor.insertCorretor(new Corretor("Corretor1"));
+        servicoCorretor.insertCorretor(new Corretor("Corretor2"));
+
+        List<model.Corretor> corretores = servicoCorretor.selectAllCorretores();
+
+        for (model.Corretor corretor : corretores) {
+            System.out.printf(corretor.toString() + '\n');
         }
 
         // Compra
