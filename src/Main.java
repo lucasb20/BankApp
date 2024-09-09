@@ -6,6 +6,7 @@ import model.Reserva;
 import model.TipoBoletoCustomizado;
 import model.TipoConta;
 import model.BandeiraCartao;
+import model.BoletoCustomizado;
 import model.CartaoCredito;
 import model.CartaoTransacao;
 import model.CategoriaCartao;
@@ -238,7 +239,6 @@ public class Main {
         }
 
         // Tipo Boleto Customizado
-
         service.ServicoTipoBoletoCustomizado servicoTipoBoletoCustomizado = new service.ServicoTipoBoletoCustomizado();
 
         servicoTipoBoletoCustomizado.insertTipoBoletoCustomizado(new TipoBoletoCustomizado("Boleto1"));
@@ -248,6 +248,19 @@ public class Main {
 
         for (TipoBoletoCustomizado tipoBoletoCustomizado : tipoBoletoCustomizados) {
             System.out.printf(tipoBoletoCustomizado.toString() + '\n');
+        }
+
+        // Boleto Customizado
+        service.ServicoBoletoCustomizado servicoBoletoCustomizado = new service.ServicoBoletoCustomizado();
+
+        servicoBoletoCustomizado.insertBoletoCustomizado(new BoletoCustomizado(100, "2021-10-20 14:30:00", "2021-10-20 14:30:00", "1234567891011121314151617181920212223242526", 1, 1));
+        servicoBoletoCustomizado.insertBoletoCustomizado(new BoletoCustomizado(200, "2021-10-21 08:30:00", "2021-10-21 08:30:00", "1234567891011121314151617181920212223242527", 1, 1));
+        servicoBoletoCustomizado.insertBoletoCustomizado(new BoletoCustomizado(300, "2021-10-22 10:30:00", "2021-10-22 10:30:00", "1234567891011121314151617181920212223242528", 1, 1));
+        
+        List<BoletoCustomizado> boletoCustomizados = servicoBoletoCustomizado.selectAllBoletoCustomizado();
+
+        for (BoletoCustomizado boletoCustomizado : boletoCustomizados) {
+            System.out.printf(boletoCustomizado.toString() + '\n');
         }
     }
 }
