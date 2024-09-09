@@ -13,6 +13,7 @@ import model.Compra;
 import model.Conta;
 import model.Corretor;
 import model.FaturaCartao;
+import model.ItensFatura;
 import model.MovimentacaoReserva;
 import model.MovimentacaoConta;
 
@@ -220,6 +221,19 @@ public class Main {
 
         for (FaturaCartao faturaCartao : faturaCartaos) {
             System.out.printf(faturaCartao.toString() + '\n');
+        }
+
+        // Itens Fatura
+        service.ServicoItensFatura servicoItensFatura = new service.ServicoItensFatura();
+
+        servicoItensFatura.insertItensFatura(new ItensFatura("Cavalo", 1));
+        servicoItensFatura.insertItensFatura(new ItensFatura("Frango", 1));
+        servicoItensFatura.insertItensFatura(new ItensFatura("Leite", 1));
+
+        List<ItensFatura> itensFaturas = servicoItensFatura.selectAllItensFatura();
+
+        for (ItensFatura itensFatura : itensFaturas) {
+            System.out.printf(itensFatura.toString() + '\n');
         }
     }
 }

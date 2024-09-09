@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ItensFaturaDAO extends ConexaoDB {
     
-    private static final String INSERT = "INSERT INTO itens_fatura (descricao, fatura_cartao_id) VALUES (?, ?, ?)";
+    private static final String INSERT = "INSERT INTO itens_fatura (descricao, fatura_cartao_id) VALUES (?, ?)";
     private static final String SELECT = "SELECT * FROM itens_fatura";
     private static final String DELETE = "DELETE FROM itens_fatura WHERE id = ?";
     private static final String UPDATE = "UPDATE itens_fatura SET descricao = ?, fatura_cartao_id = ? WHERE id = ?";
