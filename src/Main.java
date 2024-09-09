@@ -4,6 +4,7 @@ import java.util.List;
 import model.Pessoa;
 import model.Reserva;
 import model.TipoConta;
+import model.CategoriaCartao;
 import model.Client;
 import model.Conta;
 import model.MovimentacaoReserva;
@@ -128,6 +129,19 @@ public class Main {
 
         for (model.MovimentacaoConta movimentacaoConta : movimentacaoContas) {
             System.out.printf(movimentacaoConta.toString() + '\n');
+        }
+
+        // Categoria Cartão
+        service.ServicoCategoriaCartao servicoCategoriaCartao = new service.ServicoCategoriaCartao();
+
+        servicoCategoriaCartao.insertCategoriaCartao(new CategoriaCartao("Alimentação"));
+        servicoCategoriaCartao.insertCategoriaCartao(new CategoriaCartao("Transporte"));
+        servicoCategoriaCartao.insertCategoriaCartao(new CategoriaCartao("Saúde"));
+
+        List<CategoriaCartao> categoriaCartaos = servicoCategoriaCartao.selectAllCategoriaCartao();
+
+        for (CategoriaCartao categoriaCartao : categoriaCartaos) {
+            System.out.printf(categoriaCartao.toString() + '\n');
         }
     }
 }
