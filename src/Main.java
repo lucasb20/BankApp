@@ -12,6 +12,7 @@ import model.Client;
 import model.Compra;
 import model.Conta;
 import model.Corretor;
+import model.FaturaCartao;
 import model.MovimentacaoReserva;
 import model.MovimentacaoConta;
 
@@ -205,6 +206,20 @@ public class Main {
 
         for (model.Compra compra : compras) {
             System.out.printf(compra.toString() + '\n');
+        }
+
+        // Fatura Cartão
+
+        service.ServicoFaturaCartao servicoFaturaCartao = new service.ServicoFaturaCartao();
+
+        servicoFaturaCartao.insertFaturaCartao(new FaturaCartao("jan", "2021", 100, 1, "2021-10-20 14:30:00"));
+        servicoFaturaCartao.insertFaturaCartao(new FaturaCartao("fev", "2021", 200, 1, "2021-10-21 08:30:00"));
+        servicoFaturaCartao.insertFaturaCartao(new FaturaCartao("mar", "2021", 300, 1, "2021-10-22 10:30:00"));
+
+        List<FaturaCartao> faturaCartaos = servicoFaturaCartao.selectAllFaturaCartao();
+
+        for (FaturaCartao faturaCartao : faturaCartaos) {
+            System.out.printf(faturaCartao.toString() + '\n');
         }
     }
 }
