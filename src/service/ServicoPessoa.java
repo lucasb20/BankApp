@@ -11,20 +11,20 @@ public class ServicoPessoa {
     private PessoaDAO pessoaDao = new PessoaDAO();
 
     public void insertPessoa(Pessoa entidade) {
-        pessoaDao.insertPessoa(entidade);
+        pessoaDao.insert(entidade);
     }
 
     public List<Pessoa> selectAllPessoas(){
-        return pessoaDao.selectAllPessoas();
+        return pessoaDao.select();
     }
 
     public Pessoa selectPessoa(int id) {
-        return pessoaDao.selectPessoa(id);
+        return pessoaDao.select(id);
     }
 
     public Boolean updatePessoa(Pessoa entidade) {
         try {
-            return pessoaDao.updatePessoa(entidade);
+            return pessoaDao.update(entidade);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -33,7 +33,7 @@ public class ServicoPessoa {
 
     public Boolean deletePessoa(int id) {
         try {
-            if (pessoaDao.deletePessoa(id)) {
+            if (pessoaDao.delete(id)) {
                 return true;
             } 
         } catch (SQLException e) {

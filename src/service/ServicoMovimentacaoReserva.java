@@ -4,20 +4,26 @@ import DAO.MovimentacaoReservaDAO;
 
 import model.MovimentacaoReserva;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class ServicoMovimentacaoReserva {
     private MovimentacaoReservaDAO movimentacaoReservaDAO = new MovimentacaoReservaDAO();
 
-    public void insertMovimentacaoReserva(double valor, String tipo_movimentacao, String dt_movimentacao, int reserva_id) {
-        movimentacaoReservaDAO.insertMovimentacaoReserva(valor, tipo_movimentacao, dt_movimentacao, reserva_id);
+    public void insertMovimentacaoReserva(MovimentacaoReserva entidade) {
+        Date dataHoraAtual = new Date();
+        String data = new SimpleDateFormat("dd/MM/yyyy").format(dataHoraAtual);
+        String hora = new SimpleDateFormat("HH:mm:ss").format(dataHoraAtual);
+        entidade.setDtMovimentacao(data + " " + hora);
+        movimentacaoReservaDAO.insert(entidade);
     }
 
-    public void updateMovimentacaoReserva(double valor, String tipo_movimentacao, String dt_movimentacao, int reserva_id) {
-        movimentacaoReservaDAO.updateMovimentacaoReserva(valor, tipo_movimentacao, dt_movimentacao, reserva_id);
+    public void updateMovimentacaoReserva(MovimentacaoReserva entidade) {
+        movimentacaoReservaDAO.update(entidade);
     }
 
-    public List<MovimentacaoReserva> selectAllMovimentacaoReserva(int reserva_id) {
-        return movimentacaoReservaDAO.selectAllMovimentacaoReserva(reserva_id);
+    public List<MovimentacaoReserva> selectAllMovimentacaoReserva() {
+        return movimentacaoReservaDAO.select();
     }
 }

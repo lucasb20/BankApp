@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class MovimentacaoReservaDAO extends ConexaoDB {
     private static final String INSERT = "INSERT INTO movimentacao_reserva (valor, tipo_movimentacao, dt_movimentacao, reserva_id) VALUES (?, ?, ?, ?)";
-    private static final String SELECT = "SELECT * FROM movimentacao_reserva WHERE reserva_id = ?";
+    private static final String SELECT = "SELECT * FROM movimentacao_reserva";
     private static final String UPDATE = "UPDATE movimentacao_reserva SET valor = ?, tipo_movimentacao = ?, dt_movimentacao = ? WHERE reserva_id = ?";
     private static final String SELECT_ID = "SELECT * FROM movimentacao_reserva WHERE id = ?";
     private static final String DELETE = "DELETE FROM movimentacao_reserva WHERE id = ?";
@@ -34,12 +34,12 @@ public class MovimentacaoReservaDAO extends ConexaoDB {
         return count;
     }
 
-    public void insert(double valor, String tipo_movimentacao, String dt_movimentacao, int reserva_id) {
+    public void insert(MovimentacaoReserva movimentacao) {
         try (PreparedStatement preparedStatement = prepararSQL(INSERT)) {
-            preparedStatement.setDouble(1, valor);
-            preparedStatement.setString(2, tipo_movimentacao);
-            preparedStatement.setString(3, dt_movimentacao);
-            preparedStatement.setInt(4, reserva_id);
+            preparedStatement.setDouble(1, movimentacao.getValor());
+            preparedStatement.setString(2, movimentacao.getTipoMovimentacao());
+            preparedStatement.setString(3, movimentacao.getDtMovimentacao());
+            preparedStatement.setInt(4, movimentacao.getReservaId());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -49,12 +49,12 @@ public class MovimentacaoReservaDAO extends ConexaoDB {
         }
     }
 
-    public void update(double valor, String tipo_movimentacao, String dt_movimentacao, int reserva_id) {
+    public void update(MovimentacaoReserva movimentacao) {
         try (PreparedStatement preparedStatement = prepararSQL(UPDATE)) {
-            preparedStatement.setDouble(1, valor);
-            preparedStatement.setString(2, tipo_movimentacao);
-            preparedStatement.setString(3, dt_movimentacao);
-            preparedStatement.setInt(4, reserva_id);
+            preparedStatement.setDouble(1, movimentacao.getValor());
+            preparedStatement.setString(2, movimentacao.getTipoMovimentacao());
+            preparedStatement.setString(3, movimentacao.getDtMovimentacao());
+            preparedStatement.setInt(4, movimentacao.getReservaId());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

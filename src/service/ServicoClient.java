@@ -23,21 +23,21 @@ public class ServicoClient {
     public void insertClient(Client entidade) {
         String fator_risco = calcFatorRisco(entidade.getRendaMensal());
         entidade.setFatorRisco(fator_risco);
-        clientDao.insertClient(entidade);
+        clientDao.insert(entidade);
     }
 
     public List<Client> selectAllClients(){
-        return clientDao.selectAllClients();
+        return clientDao.select();
     }
 
     public Client selectClient(int id) {
-        return clientDao.selectClient(id);
+        return clientDao.select(id);
     }
 
     public Boolean updateClient(Client entidade) {
         try {
             entidade.setFatorRisco(calcFatorRisco(entidade.getRendaMensal()));
-            return clientDao.updateClient(entidade);
+            return clientDao.update(entidade);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -46,7 +46,7 @@ public class ServicoClient {
 
     public Boolean deleteClient(int id) {
         try {
-            if (clientDao.deleteClient(id)) {
+            if (clientDao.delete(id)) {
                 return true;
             } 
         } catch (SQLException e) {

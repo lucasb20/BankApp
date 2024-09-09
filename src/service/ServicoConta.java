@@ -9,22 +9,22 @@ public class ServicoConta {
     private ContaDAO contaDAO = new ContaDAO();
 
     public void inserirConta(Conta conta) {
-        contaDAO.insertConta(conta);
+        contaDAO.insert(conta);
     }
 
     public Conta selectConta(int id) {
-        return contaDAO.selectConta(id);
+        return contaDAO.select(id);
     }
 
     public List<Conta> selectAllConta() {
-        return contaDAO.selectAllConta();
+        return contaDAO.select();
     }
 
     public void deleteConta(int id) {
-        contaDAO.deleteConta(id);
+        contaDAO.delete(id);
     }
 
     public void updateConta(Conta conta) {
-        contaDAO.updateConta(conta);
+        contaDAO.update(conta);
     }
 }

@@ -9,22 +9,22 @@ public class ServicoReserva {
     private ReservaDAO reservaDAO = new ReservaDAO();
 
     public void insertReserva(Reserva reserva) {
-        reservaDAO.insertReserva(reserva);
+        reservaDAO.insert(reserva);
     }
 
     public Reserva selectReserva(int id) {
-        return reservaDAO.selectReserva(id);
+        return reservaDAO.select(id);
     }
 
     public void updateReserva(Reserva reserva) {
-        reservaDAO.updateReserva(reserva);
+        reservaDAO.update(reserva);
     }
 
     public void deleteReserva(int id) {
-        reservaDAO.deleteReserva(id);
+        reservaDAO.delete(id);
     }
 
     public List<Reserva> selectAllReservas() {
-        return reservaDAO.selectAllReservas();
+        return reservaDAO.select();
     }
 }

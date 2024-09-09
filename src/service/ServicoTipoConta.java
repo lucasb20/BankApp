@@ -10,18 +10,18 @@ public class ServicoTipoConta {
     private TipoContaDAO tipoContaDAO = new TipoContaDAO();
 
     public List<TipoConta> selectAllTipoContas(){
-        return tipoContaDAO.selectAllTipoContas();
+        return tipoContaDAO.select();
     }
 
     public TipoConta selectTipoConta(int id){
-        return tipoContaDAO.selectTipoConta(id);
+        return tipoContaDAO.select(id);
     }
 
     public void insertTipoConta(TipoConta tipoConta){
-        tipoContaDAO.insertTipoConta(tipoConta);
+        tipoContaDAO.insert(tipoConta);
     }
 
     public void deleteTipoConta(int id){
-        tipoContaDAO.deleteTipoConta(id);
+        tipoContaDAO.delete(id);
     }
 }

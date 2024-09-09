@@ -6,6 +6,7 @@ import model.Reserva;
 import model.TipoConta;
 import model.Client;
 import model.Conta;
+import model.MovimentacaoReserva;
 
 public class Main {
     public static void main(String[] args) {
@@ -105,11 +106,11 @@ public class Main {
         // MovimentacaoReserva
         service.ServicoMovimentacaoReserva servicoMovimentacaoReserva = new service.ServicoMovimentacaoReserva();
 
-        servicoMovimentacaoReserva.insertMovimentacaoReserva(1000, "Entrada", "2021-10-10 23:00:00", 1);
-        servicoMovimentacaoReserva.insertMovimentacaoReserva(200, "saída", "2021-10-20 14:30:00", 1);
-        servicoMovimentacaoReserva.insertMovimentacaoReserva(300, "entrada", "2021-10-21 08:30:00", 1);
+        servicoMovimentacaoReserva.insertMovimentacaoReserva(new MovimentacaoReserva(200, "saída", "2021-10-20 14:30:00", 1));
+        servicoMovimentacaoReserva.insertMovimentacaoReserva(new MovimentacaoReserva(300, "entrada", "2021-10-21 08:30:00", 1));
+        servicoMovimentacaoReserva.insertMovimentacaoReserva(new MovimentacaoReserva(400, "saída", "2021-10-22 10:30:00", 1));
 
-        List<model.MovimentacaoReserva> movimentacaoReservas = servicoMovimentacaoReserva.selectAllMovimentacaoReserva(1);
+        List<model.MovimentacaoReserva> movimentacaoReservas = servicoMovimentacaoReserva.selectAllMovimentacaoReserva();
 
         for (model.MovimentacaoReserva movimentacaoReserva : movimentacaoReservas) {
             System.out.printf(movimentacaoReserva.toString() + '\n');
