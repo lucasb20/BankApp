@@ -86,7 +86,7 @@ public class Compra extends GenericModel {
                 "id=" + super.getId() +
                 ", quantidade_parcela=" + quantidade_parcela +
                 ", valor=" + valor +
-                ", cartao_transacao + " + cartao_transacao_id +
+                ", cartao_transacao=" + cartao_transacao_id +
                 ", corretor_id=" + corretor_id +
                 ", taxa_parcelamento=" + taxa_parcelamento +
                 ", credor='" + credor + '\'' +

@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CompraDAO extends ConexaoDB {
-    private static final String INSERT = "INSERT INTO compra (quantidade_parcelas, valor, cartao_credito_id, corretor_id, taxa_parcelamento, credor, dt_compra) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private static final String INSERT = "INSERT INTO compra (quantidade_parcela, valor, cartao_transacao_id, corretor_id, taxa_parcelamento, credor, dt_compra) VALUES (?, ?, ?, ?, ?, ?, ?)";
     private static final String DELETE = "DELETE FROM compra WHERE id = ?";
-    private static final String UPDATE = "UPDATE compra SET quantidade_parcelas = ?, valor = ?, cartao_credito_id = ?, corretor_id = ?, taxa_parcelamento = ?, credor = ?, dt_compra = ? WHERE id = ?";
+    private static final String UPDATE = "UPDATE compra SET quantidade_parcela = ?, valor = ?, cartao_transacao_id = ?, corretor_id = ?, taxa_parcelamento = ?, credor = ?, dt_compra = ? WHERE id = ?";
     private static final String SELECT_ID = "SELECT * FROM compra WHERE id = ?";
     private static final String TOTAL = "SELECT COUNT(1) FROM compra";
     private static final String SELECT = "SELECT * FROM compra";
@@ -57,15 +57,15 @@ public class CompraDAO extends ConexaoDB {
 
             while (rs.next()) {
                 int id = rs.getInt("id");
-                int quantidade_parcelas = rs.getInt("quantidade_parcelas");
+                int quantidade_parcela = rs.getInt("quantidade_parcela");
                 double valor = rs.getDouble("valor");
-                int cartao_credito_id = rs.getInt("cartao_credito_id");
+                int cartao_transacao_id = rs.getInt("cartao_transacao_id");
                 int corretor_id = rs.getInt("corretor_id");
                 double taxa_parcelamento = rs.getDouble("taxa_parcelamento");
                 String credor = rs.getString("credor");
                 String dt_compra = rs.getString("dt_compra");
 
-                compras.add(new Compra(id, quantidade_parcelas, valor, cartao_credito_id, corretor_id, taxa_parcelamento, credor, dt_compra));
+                compras.add(new Compra(id, quantidade_parcela, valor, cartao_transacao_id, corretor_id, taxa_parcelamento, credor, dt_compra));
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -82,15 +82,15 @@ public class CompraDAO extends ConexaoDB {
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
-                int quantidade_parcelas = rs.getInt("quantidade_parcelas");
+                int quantidade_parcela = rs.getInt("quantidade_parcela");
                 double valor = rs.getDouble("valor");
-                int cartao_credito_id = rs.getInt("cartao_credito_id");
+                int cartao_transacao_id = rs.getInt("cartao_transacao_id");
                 int corretor_id = rs.getInt("corretor_id");
                 double taxa_parcelamento = rs.getDouble("taxa_parcelamento");
                 String credor = rs.getString("credor");
                 String dt_compra = rs.getString("dt_compra");
 
-                compra = new Compra(id, quantidade_parcelas, valor, cartao_credito_id, corretor_id, taxa_parcelamento, credor, dt_compra);
+                compra = new Compra(id, quantidade_parcela, valor, cartao_transacao_id, corretor_id, taxa_parcelamento, credor, dt_compra);
             }
         } catch (SQLException e) {
             printSQLException(e);
