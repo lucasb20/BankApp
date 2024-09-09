@@ -9,6 +9,7 @@ import model.CartaoCredito;
 import model.CartaoTransacao;
 import model.CategoriaCartao;
 import model.Client;
+import model.Compra;
 import model.Conta;
 import model.MovimentacaoReserva;
 import model.MovimentacaoConta;
@@ -178,6 +179,19 @@ public class Main {
 
         for (CartaoTransacao cartaoTransacao : cartaoTransacaos) {
             System.out.printf(cartaoTransacao.toString() + '\n');
+        }
+
+        // Compra
+        service.ServicoCompra servicoCompra = new service.ServicoCompra();
+
+        servicoCompra.insertCompra(new Compra(3, 100, 1, 1, 0.05, "Credor1", "2021-10-20 14:30:00"));
+        servicoCompra.insertCompra(new Compra(4, 200, 1, 1, 0.1, "Credor2", "2021-10-21 08:30:00"));
+        servicoCompra.insertCompra(new Compra(5, 300, 1, 1, 0.15, "Credor3", "2021-10-22 10:30:00"));
+
+        List<model.Compra> compras = servicoCompra.selectAllCompra();
+
+        for (model.Compra compra : compras) {
+            System.out.printf(compra.toString() + '\n');
         }
     }
 }
