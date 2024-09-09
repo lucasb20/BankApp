@@ -4,6 +4,7 @@ import java.util.List;
 import model.Pessoa;
 import model.Reserva;
 import model.TipoConta;
+import model.BandeiraCartao;
 import model.CartaoCredito;
 import model.CartaoTransacao;
 import model.CategoriaCartao;
@@ -154,6 +155,18 @@ public class Main {
         CartaoCredito cartaoCredito1 = servicoCartaoCredito.selectCartaoCredito(1);
 
         System.out.printf(cartaoCredito1.toString() + '\n');
+
+        // Bandeira Cartão
+        service.ServicoBandeiraCartao servicoBandeiraCartao = new service.ServicoBandeiraCartao();
+
+        servicoBandeiraCartao.insertBandeiraCartao(new model.BandeiraCartao("Mastercard"));
+        servicoBandeiraCartao.insertBandeiraCartao(new model.BandeiraCartao("Visa"));
+
+        List<BandeiraCartao> bandeiraCartaos = servicoBandeiraCartao.selectAllBandeiraCartao();
+
+        for (BandeiraCartao bandeiraCartao : bandeiraCartaos) {
+            System.out.printf(bandeiraCartao.toString() + '\n');
+        }
 
         // Cartão Transação
         service.ServicoCartaoTransacao servicoCartaoTransacao = new service.ServicoCartaoTransacao();
