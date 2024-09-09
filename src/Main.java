@@ -5,6 +5,7 @@ import model.Pessoa;
 import model.Reserva;
 import model.TipoConta;
 import model.CartaoCredito;
+import model.CartaoTransacao;
 import model.CategoriaCartao;
 import model.Client;
 import model.Conta;
@@ -153,5 +154,14 @@ public class Main {
         CartaoCredito cartaoCredito1 = servicoCartaoCredito.selectCartaoCredito(1);
 
         System.out.printf(cartaoCredito1.toString() + '\n');
+
+        // Cartão Transação
+        service.ServicoCartaoTransacao servicoCartaoTransacao = new service.ServicoCartaoTransacao();
+
+        servicoCartaoTransacao.insertCartaoTransacao(new CartaoTransacao("1234567891011121", "123", 1, "Crédito", "Lucas Rocha", "Compra", false, 1));
+
+        CartaoTransacao cartaoTransacao1 = servicoCartaoTransacao.selectCartaoTransacao(1);
+
+        System.out.printf(cartaoTransacao1.toString() + '\n');
     }
 }
