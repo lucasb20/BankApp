@@ -17,6 +17,7 @@ import model.Corretor;
 import model.FaturaCartao;
 import model.ItensFatura;
 import model.MovimentacaoReserva;
+import model.Pagamento;
 import model.MovimentacaoConta;
 
 public class Main {
@@ -261,6 +262,19 @@ public class Main {
 
         for (BoletoCustomizado boletoCustomizado : boletoCustomizados) {
             System.out.printf(boletoCustomizado.toString() + '\n');
+        }
+
+        // Pagamento
+        service.ServicoPagamento servicoPagamento = new service.ServicoPagamento();
+
+        servicoPagamento.insertPagamento(new Pagamento(500, "2021-10-20 14:30:00", 1,100, 1));
+        servicoPagamento.insertPagamento(new Pagamento(1000, "2021-10-21 08:30:00", 1, 200, 1));
+        servicoPagamento.insertPagamento(new Pagamento(1500, "2021-10-22 10:30:00", 1, 300, 1));
+
+        List<model.Pagamento> pagamentos = servicoPagamento.selectAllPagamento();
+
+        for (model.Pagamento pagamento : pagamentos) {
+            System.out.printf(pagamento.toString() + '\n');
         }
     }
 }
