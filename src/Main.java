@@ -7,6 +7,7 @@ import model.TipoConta;
 import model.Client;
 import model.Conta;
 import model.MovimentacaoReserva;
+import model.MovimentacaoConta;
 
 public class Main {
     public static void main(String[] args) {
@@ -114,6 +115,19 @@ public class Main {
 
         for (model.MovimentacaoReserva movimentacaoReserva : movimentacaoReservas) {
             System.out.printf(movimentacaoReserva.toString() + '\n');
+        }
+
+        // MovimentacaoConta
+        service.ServicoMovimentacaoConta servicoMovimentacaoConta = new service.ServicoMovimentacaoConta();
+
+        servicoMovimentacaoConta.insertMovimentacaoConta(new MovimentacaoConta(200, "saída", "2021-10-20 14:30:00", 1));
+        servicoMovimentacaoConta.insertMovimentacaoConta(new MovimentacaoConta(300, "entrada", "2021-10-21 08:30:00", 1));
+        servicoMovimentacaoConta.insertMovimentacaoConta(new MovimentacaoConta(400, "saída", "2021-10-22 10:30:00", 1));
+
+        List<model.MovimentacaoConta> movimentacaoContas = servicoMovimentacaoConta.selectAllMovimentacaoConta();
+
+        for (model.MovimentacaoConta movimentacaoConta : movimentacaoContas) {
+            System.out.printf(movimentacaoConta.toString() + '\n');
         }
     }
 }
