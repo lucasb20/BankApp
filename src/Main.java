@@ -91,7 +91,7 @@ public class Main {
 
         servicoConta.inserirConta(new Conta(1000, 100, 1, 1));
 
-        model.Conta conta1 = servicoConta.selectConta(1);
+        Conta conta1 = servicoConta.selectConta(1);
 
         System.out.printf(conta1.toString() + '\n');
 
@@ -123,9 +123,9 @@ public class Main {
         servicoMovimentacaoReserva.insertMovimentacaoReserva(new MovimentacaoReserva(300, "entrada", "2021-10-21 08:30:00", 1));
         servicoMovimentacaoReserva.insertMovimentacaoReserva(new MovimentacaoReserva(400, "saída", "2021-10-22 10:30:00", 1));
 
-        List<model.MovimentacaoReserva> movimentacaoReservas = servicoMovimentacaoReserva.selectAllMovimentacaoReserva();
+        List<MovimentacaoReserva> movimentacaoReservas = servicoMovimentacaoReserva.selectAllMovimentacaoReserva();
 
-        for (model.MovimentacaoReserva movimentacaoReserva : movimentacaoReservas) {
+        for (MovimentacaoReserva movimentacaoReserva : movimentacaoReservas) {
             System.out.printf(movimentacaoReserva.toString() + '\n');
         }
 
@@ -136,9 +136,9 @@ public class Main {
         servicoMovimentacaoConta.insertMovimentacaoConta(new MovimentacaoConta(300, "entrada", "2021-10-21 08:30:00", 1));
         servicoMovimentacaoConta.insertMovimentacaoConta(new MovimentacaoConta(400, "saída", "2021-10-22 10:30:00", 1));
 
-        List<model.MovimentacaoConta> movimentacaoContas = servicoMovimentacaoConta.selectAllMovimentacaoConta();
+        List<MovimentacaoConta> movimentacaoContas = servicoMovimentacaoConta.selectAllMovimentacaoConta();
 
-        for (model.MovimentacaoConta movimentacaoConta : movimentacaoContas) {
+        for (MovimentacaoConta movimentacaoConta : movimentacaoContas) {
             System.out.printf(movimentacaoConta.toString() + '\n');
         }
 
@@ -167,8 +167,8 @@ public class Main {
         // Bandeira Cartão
         service.ServicoBandeiraCartao servicoBandeiraCartao = new service.ServicoBandeiraCartao();
 
-        servicoBandeiraCartao.insertBandeiraCartao(new model.BandeiraCartao("Mastercard"));
-        servicoBandeiraCartao.insertBandeiraCartao(new model.BandeiraCartao("Visa"));
+        servicoBandeiraCartao.insertBandeiraCartao(new BandeiraCartao("Mastercard"));
+        servicoBandeiraCartao.insertBandeiraCartao(new BandeiraCartao("Visa"));
 
         List<BandeiraCartao> bandeiraCartaos = servicoBandeiraCartao.selectAllBandeiraCartao();
 
@@ -195,9 +195,9 @@ public class Main {
         servicoMovimentacaoCartao.insertMovimentacaoCartao(new MovimentacaoCartao(1, "Saída", 200, ""));
         servicoMovimentacaoCartao.insertMovimentacaoCartao(new MovimentacaoCartao(2, "Saída", 300, ""));
 
-        List<model.MovimentacaoCartao> movimentacaoCartaos = servicoMovimentacaoCartao.selectAllMovimentacaoCartao();
+        List<MovimentacaoCartao> movimentacaoCartaos = servicoMovimentacaoCartao.selectAllMovimentacaoCartao();
 
-        for (model.MovimentacaoCartao movimentacaoCartao : movimentacaoCartaos) {
+        for (MovimentacaoCartao movimentacaoCartao : movimentacaoCartaos) {
             System.out.printf(movimentacaoCartao.toString() + '\n');
         }
 
@@ -207,9 +207,9 @@ public class Main {
         servicoCorretor.insertCorretor(new Corretor("Corretor1"));
         servicoCorretor.insertCorretor(new Corretor("Corretor2"));
 
-        List<model.Corretor> corretores = servicoCorretor.selectAllCorretores();
+        List<Corretor> corretores = servicoCorretor.selectAllCorretores();
 
-        for (model.Corretor corretor : corretores) {
+        for (Corretor corretor : corretores) {
             System.out.printf(corretor.toString() + '\n');
         }
 
@@ -220,9 +220,9 @@ public class Main {
         servicoCompra.insertCompra(new Compra(4, 200, 1, 1, 0.1, "Credor2", "2021-10-21 08:30:00"));
         servicoCompra.insertCompra(new Compra(5, 300, 1, 1, 0.15, "Credor3", "2021-10-22 10:30:00"));
 
-        List<model.Compra> compras = servicoCompra.selectAllCompra();
+        List<Compra> compras = servicoCompra.selectAllCompra();
 
-        for (model.Compra compra : compras) {
+        for (Compra compra : compras) {
             System.out.printf(compra.toString() + '\n');
         }
 
@@ -285,9 +285,9 @@ public class Main {
         servicoPagamento.insertPagamento(new Pagamento(1000, "2021-10-21 08:30:00", 1, 200, 1));
         servicoPagamento.insertPagamento(new Pagamento(1500, "2021-10-22 10:30:00", 1, 300, 1));
 
-        List<model.Pagamento> pagamentos = servicoPagamento.selectAllPagamento();
+        List<Pagamento> pagamentos = servicoPagamento.selectAllPagamento();
 
-        for (model.Pagamento pagamento : pagamentos) {
+        for (Pagamento pagamento : pagamentos) {
             System.out.printf(pagamento.toString() + '\n');
         }
     }
